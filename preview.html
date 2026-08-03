@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This Summer Changed How I See Cities</title>
+<style>/* =================================================================
+   THIS SUMMER CHANGED HOW I SEE CITIES
+   A scroll-based visual essay.
+
+   TYPE SYSTEM
+   Display / chapter titles : "Fraunces"     (editorial serif, warm, slightly idiosyncratic)
+   Body                     : "Inter"        (quiet, neutral, legible at length)
+   Labels / captions / nav  : "IBM Plex Mono" (utility voice — numbers, metadata)
+
+   COLOR SYSTEM
+   --paper   : page background
+   --ink     : primary text
+   --ink-60  : secondary text
+   --line    : hairline dividers
+   --blue    : Columbia blue, used only as a whisper (progress rail, one accent per chapter)
+   ================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --paper: #FBFBF9;
+  --ink: #131313;
+  --ink-60: #6B6B68;
+  --ink-35: #B4B3AE;
+  --line: #E4E3DE;
+  --blue: #A9C7DA;
+  --blue-deep: #6E93AA;
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --gutter: clamp(24px, 6vw, 96px);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+
+/* -----------------------------------------------------------------
+   PROGRESS RAIL — the signature element.
+   A hairline that fills as you descend through the essay, like a
+   bookmark ribbon slowly being pulled out.
+   ----------------------------------------------------------------- */
+.progress-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100vh;
+  background: var(--line);
+  z-index: 100;
+}
+.progress-fill {
+  width: 100%;
+  height: 0%;
+  background: var(--blue-deep);
+  transition: height 0.05s linear;
+}
+
+/* -----------------------------------------------------------------
+   NAV
+   ----------------------------------------------------------------- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px var(--gutter) 22px calc(var(--gutter) + 14px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  z-index: 90;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+.site-nav span { color: var(--paper); }
+
+/* -----------------------------------------------------------------
+   LANDING
+   ----------------------------------------------------------------- */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 var(--gutter);
+  position: relative;
+}
+
+.landing-content { max-width: 900px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  margin: 0 0 28px;
+}
+
+.landing-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 9vw, 108px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 32px;
+}
+.landing-title span { display: block; overflow: hidden; }
+
+.landing-subtitle {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--ink-60);
+  max-width: 520px;
+  font-weight: 300;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 48px;
+  left: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 40px;
+  background: var(--ink-35);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-cue-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--blue-deep);
+  animation: scrollpulse 2.2s ease-in-out infinite;
+}
+@keyframes scrollpulse {
+  0% { top: -100%; }
+  60% { top: 100%; }
+  100% { top: 100%; }
+}
+
+/* -----------------------------------------------------------------
+   CHAPTERS — shared editorial rhythm
+   ----------------------------------------------------------------- */
+.chapter {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(80px, 14vw, 200px) var(--gutter) clamp(40px, 8vw, 100px);
+}
+
+.chapter-head {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: clamp(28px, 5vw, 56px);
+}
+
+.chapter-number {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--blue-deep);
+  letter-spacing: 0.04em;
+}
+
+.chapter-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 5.5vw, 64px);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.text-block {
+  max-width: 760px;
+  margin: 0 0 clamp(40px, 6vw, 72px);
+}
+.text-block.narrow { max-width: 620px; }
+.text-block.quiet { max-width: 680px; }
+
+.lede {
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.lede-large {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.text-block p:not(.lede):not(.lede-large) {
+  font-size: 17px;
+  color: var(--ink-60);
+  font-weight: 300;
+}
+
+/* -----------------------------------------------------------------
+   IMAGES
+   ----------------------------------------------------------------- */
+figure { margin: 0; }
+figcaption {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--ink-60);
+  margin-top: 12px;
+}
+
+.image-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background:
+    repeating-linear-gradient(135deg, #EFEEE9, #EFEEE9 12px, #F6F5F1 12px, #F6F5F1 24px);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+.image-placeholder.tall { aspect-ratio: 4 / 5; }
+.image-placeholder.wide { aspect-ratio: 21 / 9; }
+
+.placeholder-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-60);
+  max-width: 240px;
+}
+
+.full-image {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0 var(--gutter);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.full-image figcaption { padding: 0 4px; }
+
+.image-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gutter);
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+@media (max-width: 720px) {
+  .image-pair { grid-template-columns: 1fr; }
+}
+
+.image-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+@media (max-width: 720px) {
+  .image-grid-3 { grid-template-columns: 1fr; }
+}
+
+.process-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+  align-items: end;
+}
+.process-strip figure:nth-child(3) .image-placeholder { aspect-ratio: 4/3; border-color: var(--blue-deep); }
+@media (max-width: 720px) {
+  .process-strip { grid-template-columns: 1fr; }
+}
+
+/* -----------------------------------------------------------------
+   CHAPTER 5 — AGENCY, interactive scales
+   ----------------------------------------------------------------- */
+.scales {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+.scale-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 22px 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: padding-left 0.25s ease, color 0.25s ease;
+}
+.scale-item:hover,
+.scale-item.active {
+  padding-left: 16px;
+  color: var(--blue-deep);
+}
+.scale-label {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 32px);
+}
+.scale-sub {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-60);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.scale-item.active .scale-sub { color: var(--blue-deep); }
+
+.scale-detail {
+  max-width: 640px;
+  font-size: 17px;
+  color: var(--ink-60);
+  font-weight: 300;
+  min-height: 60px;
+  transition: opacity 0.3s ease;
+}
+
+/* -----------------------------------------------------------------
+   CHAPTER 6 — quiet chapter
+   ----------------------------------------------------------------- */
+.chapter-quiet {
+  background: #F5F4F0;
+  max-width: none;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+.chapter-quiet .chapter-head,
+.chapter-quiet .text-block {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.chapter-quiet .chapter-head { justify-content: center; }
+
+/* -----------------------------------------------------------------
+   CHAPTER 7 — questions
+   ----------------------------------------------------------------- */
+.questions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 clamp(60px, 10vw, 140px);
+  max-width: 800px;
+  border-top: 1px solid var(--line);
+}
+.questions-list li {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-footer {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+/* -----------------------------------------------------------------
+   DIVIDER
+   ----------------------------------------------------------------- */
+.divider {
+  max-width: 1180px;
+  margin: 0 auto;
+  height: 1px;
+  background: var(--line);
+}
+
+/* -----------------------------------------------------------------
+   REVEAL ANIMATION
+   Applied via IntersectionObserver in script.js
+   ----------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-line {
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
+  transform: translateY(100%);
+  opacity: 0;
+}
+.reveal-line.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.reveal-line:nth-child(1) { transition-delay: 0.05s; }
+.reveal-line:nth-child(2) { transition-delay: 0.15s; }
+.reveal-line:nth-child(3) { transition-delay: 0.25s; }
+
+/* Subtle parallax targets */
+.full-image .image-placeholder,
+.image-pair .image-placeholder {
+  will-change: transform;
+}
+</style>
+</head>
+<body>
+
+  <!-- ============================================= -->
+  <!-- SCROLL PROGRESS INDICATOR -->
+  <!-- ============================================= -->
+  <div class="progress-rail" aria-hidden="true">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- ============================================= -->
+  <!-- MINIMAL NAV -->
+  <!-- ============================================= -->
+  <nav class="site-nav">
+    <span class="nav-mark">EMILIA REYES — MSAUD 2026</span>
+    <span class="nav-chapter" id="navChapter">Prologue</span>
+  </nav>
+
+  <!-- ============================================= -->
+  <!-- LANDING -->
+  <!-- ============================================= -->
+  <section class="landing" id="landing">
+    <div class="landing-content">
+      <p class="eyebrow reveal">A Summer at GSAPP · 2026</p>
+      <h1 class="landing-title">
+        <span class="reveal-line">This summer</span>
+        <span class="reveal-line">changed how I</span>
+        <span class="reveal-line">see cities.</span>
+      </h1>
+      <p class="landing-subtitle reveal">
+        <!-- Replace with your own one-line framing of the piece -->
+        A record of what shifted — in the way I look, draw, argue, and imagine — across ten weeks of urban design.
+      </p>
+    </div>
+    <div class="scroll-cue reveal">
+      <span class="scroll-cue-line"></span>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 1 — ARRIVAL -->
+  <!-- ============================================= -->
+  <section class="chapter" id="chapter-1" data-chapter="Chapter One — Arrival">
+    <div class="chapter-head">
+      <span class="chapter-number">01</span>
+      <h2 class="chapter-title reveal">Arrival</h2>
+    </div>
+
+    <div class="text-block reveal">
+      <p class="lede">
+        <!-- Replace: what did you believe urban design was, before this program? -->
+        I arrived in New York believing urban design was mostly about drawing better buildings —
+        that if a place felt wrong, the fix was formal. I had a sketchbook full of plans and
+        almost no questions.
+      </p>
+    </div>
+
+    <figure class="full-image reveal">
+      <div class="image-placeholder">
+        <!-- Replace this div with: <img src="images/arrival-01.jpg" alt="..."> -->
+        <span class="placeholder-label">Full-bleed image — arrival / first week / city from above</span>
+      </div>
+      <figcaption>Manhattan, week one.</figcaption>
+    </figure>
+
+    <div class="text-block narrow reveal">
+      <p>
+        <!-- Replace with a short, specific memory from the first weeks -->
+        The first site visit undid that. Standing at street level, I realized I had been
+        designing cities from the plan view my whole life — never from the sidewalk.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 2 — LEARNING TO OBSERVE -->
+  <!-- ============================================= -->
+  <section class="chapter" id="chapter-2" data-chapter="Chapter Two — Learning to Observe">
+    <div class="chapter-head">
+      <span class="chapter-number">02</span>
+      <h2 class="chapter-title reveal">Learning to Observe</h2>
+    </div>
+
+    <div class="text-block reveal">
+      <p class="lede">
+        <!-- Replace: how did observation become a design tool for you? -->
+        Observation, I learned, is not passive. A mental map is already an argument about
+        what matters. A field note is already a design decision.
+      </p>
+    </div>
+
+    <div class="image-pair reveal">
+      <figure>
+        <div class="image-placeholder tall">
+          <span class="placeholder-label">Site photo / sketch</span>
+        </div>
+        <figcaption>Field sketch, site visit.</figcaption>
+      </figure>
+      <figure>
+        <div class="image-placeholder tall">
+          <span class="placeholder-label">Mental map / annotated photo</span>
+        </div>
+        <figcaption>Mental map, week three.</figcaption>
+      </figure>
+    </div>
+
+    <div class="text-block narrow reveal">
+      <p>
+        <!-- Replace -->
+        What I noticed changed. I stopped looking for what was missing and started looking
+        for what was already working, quietly, without being designed.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 3 — LEARNING TO REPRESENT -->
+  <!-- ============================================= -->
+  <section class="chapter" id="chapter-3" data-chapter="Chapter Three — Learning to Represent">
+    <div class="chapter-head">
+      <span class="chapter-number">03</span>
+      <h2 class="chapter-title reveal">Learning to Represent</h2>
+    </div>
+
+    <div class="text-block reveal">
+      <p class="lede">
+        <!-- Replace: how did GIS, sections, diagrams change how you think, not just present -->
+        Representation stopped being the last step and became the thinking itself. A section
+        drawn wrong taught me the site was wrong in my head.
+      </p>
+    </div>
+
+    <figure class="full-image reveal">
+      <div class="image-placeholder wide">
+        <span class="placeholder-label">GIS map / spatial analysis — full width</span>
+      </div>
+      <figcaption>Spatial analysis, DTEQ Assignment 2.</figcaption>
+    </figure>
+
+    <div class="image-grid-3 reveal">
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Section drawing</span></div>
+        <figcaption>Section</figcaption>
+      </figure>
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Diagram</span></div>
+        <figcaption>Diagram</figcaption>
+      </figure>
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Animation still</span></div>
+        <figcaption>Animation still</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 4 — STUDIO -->
+  <!-- ============================================= -->
+  <section class="chapter" id="chapter-4" data-chapter="Chapter Four — Studio">
+    <div class="chapter-head">
+      <span class="chapter-number">04</span>
+      <h2 class="chapter-title reveal">Studio</h2>
+    </div>
+
+    <div class="text-block reveal">
+      <p class="lede">
+        <!-- Replace: what was the studio project about, and what did the PROCESS teach you -->
+        The studio project is what everyone sees. The eleven versions before it are what
+        actually taught me. This is one of them.
+      </p>
+    </div>
+
+    <div class="process-strip reveal">
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Iteration 1</span></div>
+        <figcaption>v1 — first instinct</figcaption>
+      </figure>
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Iteration 2</span></div>
+        <figcaption>v4 — after crit</figcaption>
+      </figure>
+      <figure>
+        <div class="image-placeholder"><span class="placeholder-label">Final</span></div>
+        <figcaption>Final board</figcaption>
+      </figure>
+    </div>
+
+    <div class="text-block narrow reveal">
+      <p>
+        <!-- Replace: what specifically shifted between iterations -->
+        Between v1 and the final, the project stopped being about the object I was placing
+        on the site, and started being about the relationships I was setting up around it.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 5 — AGENCY (interactive) -->
+  <!-- ============================================= -->
+  <section class="chapter" id="chapter-5" data-chapter="Chapter Five — Agency">
+    <div class="chapter-head">
+      <span class="chapter-number">05</span>
+      <h2 class="chapter-title reveal">Agency</h2>
+    </div>
+
+    <div class="text-block reveal">
+      <p class="lede">What is the agency of an urban designer? Where can the discipline act — and where does it stop?</p>
+    </div>
+
+    <div class="scales reveal" id="scalesGraphic">
+      <!-- Interactive scales of intervention. Click / tap each to expand. -->
+      <button class="scale-item" data-scale="object">
+        <span class="scale-label">Object</span>
+        <span class="scale-sub">a bench, a curb, a threshold</span>
+      </button>
+      <button class="scale-item" data-scale="block">
+        <span class="scale-label">Block</span>
+        <span class="scale-sub">a street, a courtyard, a frontage</span>
+      </button>
+      <button class="scale-item" data-scale="district">
+        <span class="scale-label">District</span>
+        <span class="scale-sub">a neighborhood, a watershed edge</span>
+      </button>
+      <button class="scale-item" data-scale="policy">
+        <span class="scale-label">Policy</span>
+        <span class="scale-sub">zoning, governance, incentive</span>
+      </button>
+      <button class="scale-item" data-scale="territory">
+        <span class="scale-label">Territory</span>
+        <span class="scale-sub">a region, an ecology, a system</span>
+      </button>
+    </div>
+
+    <p class="scale-detail" id="scaleDetail">
+      <!-- Replace each of these with your own answer for what the designer CAN and CANNOT do at that scale -->
+      Select a scale above.
+    </p>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 6 — WHO AM I BECOMING -->
+  <!-- ============================================= -->
+  <section class="chapter chapter-quiet" id="chapter-6" data-chapter="Chapter Six — Who Am I Becoming?">
+    <div class="chapter-head">
+      <span class="chapter-number">06</span>
+      <h2 class="chapter-title reveal">Who am I becoming?</h2>
+    </div>
+
+    <div class="text-block quiet reveal">
+      <p class="lede-large">
+        <!-- Replace: this should be the most personal, quietest paragraph on the site -->
+        A designer who starts from the ground, not the plan. Who asks who gets to decide
+        before asking what gets built.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- ============================================= -->
+  <!-- CHAPTER 7 — QUESTIONS -->
+  <!-- ============================================= -->
+  <section class="chapter chapter-questions" id="chapter-7" data-chapter="Chapter Seven — Questions">
+    <div class="chapter-head">
+      <span class="chapter-number">07</span>
+      <h2 class="chapter-title reveal">Questions I carry forward</h2>
+    </div>
+
+    <ul class="questions-list">
+      <!-- Replace with your own open questions — no resolutions -->
+      <li class="reveal">Whose city am I actually designing for, and how would I know if I got it wrong?</li>
+      <li class="reveal">Where is the line between intervention and imposition?</li>
+      <li class="reveal">Can representation ever be neutral — or is choosing what to draw already a form of power?</li>
+      <li class="reveal">What does urban design owe to a place after the render is finished?</li>
+    </ul>
+
+    <footer class="site-footer reveal">
+      <p>Emilia Reyes · MSAUD 2026 · Columbia GSAPP</p>
+    </footer>
+  </section>
+
+  <script>/* =================================================================
+   script.js
+   Handles: scroll progress rail, reveal-on-scroll animations,
+   current-chapter nav label, subtle parallax on full-bleed images,
+   and the interactive "scales of agency" graphic in Chapter 5.
+   ================================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------------------------------------------------------------
+     1. SCROLL PROGRESS RAIL
+     --------------------------------------------------------------- */
+  const progressFill = document.getElementById('progressFill');
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressFill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------------------------------------------------------------
+     2. REVEAL ON SCROLL
+     Any element with class "reveal" fades/slides up into view.
+     Landing title lines ("reveal-line") animate on load, not scroll.
+     --------------------------------------------------------------- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Landing headline: reveal immediately on load for a strong first impression
+  window.setTimeout(() => {
+    document.querySelectorAll('.landing-title .reveal-line').forEach(el => {
+      el.classList.add('is-visible');
+    });
+  }, 200);
+
+  /* ---------------------------------------------------------------
+     3. CURRENT CHAPTER LABEL IN NAV
+     Updates the small nav label as each chapter enters the viewport.
+     --------------------------------------------------------------- */
+  const navChapter = document.getElementById('navChapter');
+  const chapters = document.querySelectorAll('.chapter[data-chapter]');
+
+  const chapterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navChapter.textContent = entry.target.dataset.chapter;
+      }
+    });
+  }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
+
+  chapters.forEach(ch => chapterObserver.observe(ch));
+
+  /* ---------------------------------------------------------------
+     4. SUBTLE PARALLAX ON FULL-BLEED IMAGES
+     Moves image placeholders slightly slower than scroll for depth.
+     Skipped entirely if the visitor prefers reduced motion.
+     --------------------------------------------------------------- */
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    const parallaxEls = document.querySelectorAll('.full-image .image-placeholder');
+
+    function updateParallax() {
+      parallaxEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const elCenter = rect.top + rect.height / 2;
+        const distance = (elCenter - viewportCenter) * 0.04; // gentle strength
+        el.style.transform = `translateY(${distance}px)`;
+      });
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+  }
+
+  /* ---------------------------------------------------------------
+     5. CHAPTER 5 — INTERACTIVE SCALES OF AGENCY
+     Clicking a scale shows a short answer beneath. Replace the copy
+     in the `details` object with your own thinking for each scale.
+     --------------------------------------------------------------- */
+  const scaleButtons = document.querySelectorAll('.scale-item');
+  const scaleDetail = document.getElementById('scaleDetail');
+
+  const details = {
+    object: "At the scale of the object, the designer's agency is direct but narrow — a bench can invite people to stay, but it can't fix why they didn't feel safe staying in the first place.",
+    block: "At the block, agency grows: a street redesign can shift how a whole community moves and gathers. But it still answers to decisions made somewhere else — zoning, ownership, budget.",
+    district: "At the district scale, the designer becomes a convener more than an author — coordinating agencies, residents, and capital rather than drawing a single object.",
+    policy: "Policy is where urban design's real leverage often sits, and where designers are least trained to act. This is a limit I want to work against.",
+    territory: "At the territory scale, the designer's agency is mostly about seeing — naming systems and relationships others haven't yet connected. Building here means building consensus, not form."
+  };
+
+  scaleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      scaleButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.dataset.scale;
+      scaleDetail.style.opacity = 0;
+      window.setTimeout(() => {
+        scaleDetail.textContent = details[key] || '';
+        scaleDetail.style.opacity = 1;
+      }, 150);
+    });
+  });
+
+});
+</script>
+</body>
+</html>

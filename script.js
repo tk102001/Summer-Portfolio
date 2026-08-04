@@ -317,3 +317,38 @@ document.body.appendChild(overlay);
 });
 
 });
+/* ===========================
+   BOARD VIEWER
+=========================== */
+
+function openBoard(src){
+
+    const viewer = document.getElementById("boardViewer");
+
+    const image = document.getElementById("boardViewerImage");
+
+    image.src = src;
+
+    viewer.classList.add("active");
+
+}
+
+function closeBoard(){
+
+    document
+        .getElementById("boardViewer")
+        .classList.remove("active");
+
+}
+
+document
+.getElementById("boardViewer")
+.addEventListener("click",function(e){
+
+    if(e.target===this){
+
+        closeBoard();
+
+    }
+
+});

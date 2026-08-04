@@ -566,20 +566,29 @@ main { padding-left: 0; }
 ========================================================== */
 
 .identity-label{
+
     position:fixed;
+
     top:40px;
-    right:50px;
-    z-index:9999;
+
+    right:140px;      /* moved left so it doesn't overlap the close button */
+
+    z-index:100;
 
     font-family:var(--sans);
+
     font-size:12px;
+
     font-weight:400;
+
     letter-spacing:.15em;
+
     text-transform:uppercase;
 
     color:rgba(23,22,15,.72);
 
     transition:.4s;
+
 }
 
 .identity-label:hover{

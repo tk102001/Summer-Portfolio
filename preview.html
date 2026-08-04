@@ -596,6 +596,13 @@ main { padding-left: 0; }
     </video>
 
 </div>
+   <div id="boardViewer" class="board-viewer">
+
+    <span class="board-close" onclick="closeBoard()">&times;</span>
+
+    <img id="boardViewerImage" src="">
+
+</div>
 <body>
 
 <div class="identity-label">
@@ -723,7 +730,9 @@ class="full-image reveal">
      <img
 src="images/chapter02/board01.jpg"
 class="board-image">
-        <span class="map-trigger-label">Click to open full screen ↗</span>
+        <span class="map-trigger-label">Click to open full screen ↗
+        onclick="openImage('images/chapter04/studio-board.jpg')"
+        </span>
       </button>
 
       <p class="chapter-body reveal">
@@ -762,7 +771,9 @@ class="lightbox-image">
         By returning to the same neighbourhood through different assignments, I stopped looking for answers and started looking for relationships. Every drawing revealed another layer of how Brooklyn worked.
       </p>
 
-     <button class="map-trigger reveal">
+     <button
+class="map-trigger reveal"
+onclick="openImage('images/chapter03/board02.jpg')">
 
 <img
 src="images/chapter03/board02.jpg"
@@ -797,7 +808,9 @@ View Full Board ↗
 Some places revealed themselves only after slowing down. Representation became less about documenting a site and more about understanding its character.
 
 </p>
-<button class="map-trigger reveal">
+<button
+class="map-trigger reveal"
+onclick="openBoard('images/chapter04/studio-board.jpg')">
 
 <img
 src="images/chapter04/studio-board.jpg"
@@ -806,6 +819,7 @@ class="board-image">
 <span class="map-trigger-label">
 
 Click to inspect board ↗
+   onclick="openImage('images/chapter04/studio-board.jpg')"
 
 </span>
 
@@ -944,6 +958,7 @@ The semester didn't leave me with certainty. It left me with better questions, a
 
       <img
 src="images/chapter06/final-board.jpg"
+         onclick="openImage('images/chapter06/final-board.jpg')"
 class="board-image reveal">
 
 <div class="video-wrapper">

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Summer of Learning How to Read a City</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =============================================================
+       INTRO SEQUENCE
+       A click-through opening. Each click advances .intro-step.
+       Background drawing (Aurangabad) fades/zooms into the Columbia
+       photograph across the sequence. Ends with "Begin Walking",
+       which dismisses the intro and unlocks scrolling.
+       ============================================================= -->
+  <div class="intro" id="intro">
+    <div class="intro-bg intro-bg--drawing" id="introBgDrawing">
+      <!-- Replace: a faint architectural drawing from Aurangabad, very low opacity -->
+      <span class="placeholder-tag">Architectural drawing — Aurangabad</span>
+    </div>
+    <div class="intro-bg intro-bg--columbia" id="introBgColumbia">
+      <!-- Replace: a Columbia campus / NYC photograph -->
+      <span class="placeholder-tag">Columbia GSAPP photograph</span>
+    </div>
+
+    <div class="intro-steps">
+      <p class="intro-step is-active" data-step="0">Coming from</p>
+      <p class="intro-step" data-step="1">Coming from<br><span class="intro-emph">a city called</span></p>
+      <p class="intro-step" data-step="2"><span class="intro-emph">Aurangabad, India.</span></p>
+      <p class="intro-step" data-step="3">I thought<br>I knew<br>how to read cities.</p>
+      <p class="intro-step" data-step="4">I arrived<br><span class="intro-emph">in New York.</span></p>
+      <div class="intro-step intro-final" data-step="5">
+        <p>There was only<br>one thing left to do.</p>
+        <p class="intro-emph">Learn how<br>to read the city.</p>
+        <button class="btn-begin" id="btnBegin">Begin Walking</button>
+      </div>
+    </div>
+
+    <button class="intro-advance" id="introAdvance" aria-label="Continue">
+      <span class="intro-advance-dot"></span>
+    </button>
+    <p class="intro-hint">Click to continue</p>
+  </div>
+
+  <!-- =============================================================
+       DOT NAVIGATION
+       Vertical, left edge. Active dot grows. Hover reveals label.
+       ============================================================= -->
+  <nav class="dot-nav" id="dotNav" aria-hidden="true">
+    <a class="dot" href="#ch1" data-label="I Arrived"><span></span></a>
+    <a class="dot" href="#ch2" data-label="I Observed"><span></span></a>
+    <a class="dot" href="#ch3" data-label="I Began Asking Questions"><span></span></a>
+    <a class="dot" href="#ch4" data-label="I Learned New Ways of Seeing"><span></span></a>
+    <a class="dot" href="#ch5" data-label="I Began Designing"><span></span></a>
+    <a class="dot" href="#ch6" data-label="I Left Changed"><span></span></a>
+    <a class="dot" href="#epilogue" data-label="Epilogue"><span></span></a>
+  </nav>
+
+  <main id="mainContent">
+
+    <!-- Title, shown once the visitor begins walking -->
+    <header class="essay-title">
+      <h1>A Summer of Learning How to Read a City</h1>
+      <p>A personal reflection on twelve weeks at Columbia GSAPP.</p>
+    </header>
+
+    <!-- =========================================================
+         CHAPTER 01 — I ARRIVED
+         Interaction: quiet reveal, no gimmick — the calm opening
+         ========================================================= -->
+    <section class="chapter" id="ch1">
+      <span class="chapter-index">01</span>
+      <h2 class="chapter-title reveal">I Arrived.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace: your first reflection on arriving -->
+        The city didn't ask what I already knew. It just kept moving, and I had to
+        decide how fast to catch up.
+      </p>
+      <figure class="photo-pause reveal">
+        <div class="photo-placeholder">
+          <span class="placeholder-tag">Columbia Arrival Photograph</span>
+        </div>
+      </figure>
+      <p class="chapter-body reveal">
+        <!-- Replace -->
+        I had spent years learning to read Aurangabad — its markets, its shortcuts,
+        the logic under its apparent disorder. New York asked me to start over.
+      </p>
+    </section>
+
+    <!-- =========================================================
+         CHAPTER 02 — I OBSERVED
+         Interaction: map opens fullscreen on click
+         ========================================================= -->
+    <section class="chapter" id="ch2">
+      <span class="chapter-index">02</span>
+      <h2 class="chapter-title reveal">I Observed.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace -->
+        Observation became the first real tool I was given. Not sketching — looking,
+        slowly, until the site told me something I hadn't asked it.
+      </p>
+
+      <button class="map-trigger reveal" id="mapTrigger">
+        <div class="photo-placeholder">
+          <span class="placeholder-tag">DTEQ Working Waterfront Map</span>
+        </div>
+        <span class="map-trigger-label">Click to open full screen ↗</span>
+      </button>
+
+      <p class="chapter-body reveal">
+        <!-- Replace -->
+        The waterfront map took three weeks to feel honest. Every draft before that
+        was still describing the site the way I expected it to look.
+      </p>
+    </section>
+
+    <!-- Fullscreen map lightbox -->
+    <div class="lightbox" id="mapLightbox">
+      <button class="lightbox-close" id="mapLightboxClose" aria-label="Close">Close ✕</button>
+      <div class="lightbox-content">
+        <div class="photo-placeholder photo-placeholder--large">
+          <span class="placeholder-tag">DTEQ Working Waterfront Map — full resolution</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         CHAPTER 03 — I BEGAN ASKING QUESTIONS
+         Interaction: diagram reveals annotations on hover
+         ========================================================= -->
+    <section class="chapter" id="ch3">
+      <span class="chapter-index">03</span>
+      <h2 class="chapter-title reveal">I Began Asking Questions.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace -->
+        A diagram stopped being a way to explain my answer, and became a way to find
+        my questions. Hover over the marks below — this is what the site was actually asking.
+      </p>
+
+      <div class="annotated-diagram reveal" id="annotatedDiagram">
+        <div class="photo-placeholder">
+          <span class="placeholder-tag">Brooklyn Waterfront Diagram</span>
+        </div>
+        <!-- Replace coordinates/text with your own annotation points -->
+        <button class="annotation-point" style="top: 28%; left: 22%;" data-note="Why does public access stop exactly here?"><span>1</span></button>
+        <button class="annotation-point" style="top: 55%; left: 48%;" data-note="This edge floods twice a year. No one had drawn that yet."><span>2</span></button>
+        <button class="annotation-point" style="top: 70%; left: 75%;" data-note="Who was this frontage actually designed to face?"><span>3</span></button>
+      </div>
+      <p class="annotation-display" id="annotationDisplay">Hover the numbered points above.</p>
+    </section>
+
+    <!-- =========================================================
+         CHAPTER 04 — I LEARNED NEW WAYS OF SEEING
+         Interaction: video opens in cinematic modal
+         ========================================================= -->
+    <section class="chapter" id="ch4">
+      <span class="chapter-index">04</span>
+      <h2 class="chapter-title reveal">I Learned New Ways of Seeing.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace -->
+        Motion did what a plan drawing couldn't — it showed the site changing, not
+        just existing.
+      </p>
+
+      <button class="video-trigger reveal" id="videoTrigger">
+        <div class="photo-placeholder">
+          <span class="placeholder-tag">Assignment 3 Video</span>
+          <span class="play-icon">▶</span>
+        </div>
+      </button>
+    </section>
+
+    <!-- Cinematic video modal -->
+    <div class="cine-modal" id="cineModal">
+      <button class="lightbox-close" id="cineModalClose" aria-label="Close">Close ✕</button>
+      <div class="cine-modal-content">
+        <!-- Replace with: <video controls src="videos/assignment3.mp4"></video> -->
+        <div class="photo-placeholder photo-placeholder--video">
+          <span class="placeholder-tag">Assignment 3 Video — replace with &lt;video&gt; element</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         CHAPTER 05 — I BEGAN DESIGNING
+         Interaction: page-flip book
+         ========================================================= -->
+    <section class="chapter" id="ch5">
+      <span class="chapter-index">05</span>
+      <h2 class="chapter-title reveal">I Began Designing.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace -->
+        Design became something I could hand to someone else. This children's book
+        was how I tested whether a stranger could feel what I meant.
+      </p>
+
+      <div class="book reveal" id="book">
+        <div class="book-page" data-page="0">
+          <div class="photo-placeholder"><span class="placeholder-tag">Brooklyn Forest Friends — Cover</span></div>
+        </div>
+        <div class="book-page" data-page="1">
+          <div class="photo-placeholder"><span class="placeholder-tag">Brooklyn Forest Friends — Page 1</span></div>
+        </div>
+        <div class="book-page" data-page="2">
+          <div class="photo-placeholder"><span class="placeholder-tag">Brooklyn Forest Friends — Page 2</span></div>
+        </div>
+        <div class="book-page" data-page="3">
+          <div class="photo-placeholder"><span class="placeholder-tag">Brooklyn Forest Friends — Page 3</span></div>
+        </div>
+      </div>
+      <div class="book-controls reveal">
+        <button id="bookPrev">← Previous page</button>
+        <span id="bookPageLabel">Cover</span>
+        <button id="bookNext">Next page →</button>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         CHAPTER 06 — I LEFT CHANGED
+         Interaction: reflection cards expand on click
+         ========================================================= -->
+    <section class="chapter" id="ch6">
+      <span class="chapter-index">06</span>
+      <h2 class="chapter-title reveal">I Left Changed.</h2>
+      <p class="chapter-lede reveal">
+        <!-- Replace -->
+        Three things sit differently in me now than they did in June. Click each to read the rest.
+      </p>
+
+      <div class="reflection-cards reveal">
+        <button class="reflection-card" data-card="0">
+          <span class="reflection-card-title">On observation</span>
+          <span class="reflection-card-preview">I don't trust my first read of a site anymore —</span>
+          <span class="reflection-card-full">I don't trust my first read of a site anymore — not because it's wrong, but because it's mine, and it usually says more about me than about the place.</span>
+        </button>
+        <button class="reflection-card" data-card="1">
+          <span class="reflection-card-title">On authorship</span>
+          <span class="reflection-card-preview">I used to think a good design spoke for itself —</span>
+          <span class="reflection-card-full">I used to think a good design spoke for itself. Now I think a good design listens first, and speaks last, if at all.</span>
+        </button>
+        <button class="reflection-card" data-card="2">
+          <span class="reflection-card-title">On scale</span>
+          <span class="reflection-card-preview">I came in wanting to design buildings —</span>
+          <span class="reflection-card-full">I came in wanting to design buildings. I'm leaving more interested in the space between them — the part no one commissions, but everyone lives in.</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         EPILOGUE
+         ========================================================= -->
+    <section class="chapter epilogue" id="epilogue">
+      <p class="epilogue-line reveal">The semester ended.</p>
+      <p class="epilogue-line epilogue-emph reveal">The questions didn't.</p>
+      <footer class="site-footer reveal">
+        <p><!-- Replace with your name --> MSAUD 2026 · Columbia GSAPP</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

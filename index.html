@@ -1,4 +1,80 @@
-```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Summer of Learning How to Read a City</title>
+<link rel="stylesheet" href="style.css">
+</head>
+  <div id="boardViewer" class="board-viewer">
+
+    <span class="board-close" onclick="closeBoard()">&times;</span>
+
+    <img id="boardViewerImage" src="" alt="Board">
+
+</div>
+<body>
+ <!-- =========================================================
+     IDENTITY LABEL
+========================================================= -->
+
+<div class="identity-label">
+    TANVI KARWA | MSAUD 2026 | COLUMBIA GSAPP
+</div> 
+
+  <!-- =============================================================
+       INTRO SEQUENCE
+       A click-through opening. Each click advances .intro-step.
+       Background drawing (Aurangabad) fades/zooms into the Columbia
+       photograph across the sequence. Ends with "Begin Walking",
+       which dismisses the intro and unlocks scrolling.
+       ============================================================= -->
+  <div class="intro" id="intro">
+    <div class="intro-bg intro-bg--drawing" id="introBgDrawing">
+      <!-- Replace: a faint architectural drawing from Aurangabad, very low opacity -->
+      <span class="placeholder-tag">Architectural drawing — Aurangabad</span>
+    </div>
+    <div class="intro-bg intro-bg--columbia" id="introBgColumbia">
+      <!-- Replace: a Columbia campus / NYC photograph -->
+      <span class="placeholder-tag">Columbia GSAPP photograph</span>
+    </div>
+
+    <div class="intro-steps">
+      <p class="intro-step is-active" data-step="0">Coming from</p>
+      <p class="intro-step" data-step="1">Coming from<br><span class="intro-emph">a city called</span></p>
+      <p class="intro-step" data-step="2"><span class="intro-emph">Aurangabad, India.</span></p>
+      <p class="intro-step" data-step="3">I thought<br>I knew<br>how to read cities.</p>
+      <p class="intro-step" data-step="4">I arrived<br><span class="intro-emph">in New York.</span></p>
+      <div class="intro-step intro-final" data-step="5">
+        <p>There was only<br>one thing left to do.</p>
+        <p class="intro-emph">Learn how<br>to read the city.</p>
+        <button class="btn-begin" id="btnBegin">Begin Walking</button>
+      </div>
+    </div>
+
+    <button class="intro-advance" id="introAdvance" aria-label="Continue">
+      <span class="intro-advance-dot"></span>
+    </button>
+    <p class="intro-hint">Click to continue</p>
+  </div>
+
+  <!-- =============================================================
+       DOT NAVIGATION
+       Vertical, left edge. Active dot grows. Hover reveals label.
+       ============================================================= -->
+  <nav class="dot-nav" id="dotNav" aria-hidden="true">
+    <a class="dot" href="#ch1" data-label="I Arrived"><span></span></a>
+    <a class="dot" href="#ch2" data-label="I Observed"><span></span></a>
+    <a class="dot" href="#ch3" data-label="I Began Asking Questions"><span></span></a>
+    <a class="dot" href="#ch4" data-label="I Learned New Ways of Seeing"><span></span></a>
+    <a class="dot" href="#ch5" data-label="I Began Designing"><span></span></a>
+    <a class="dot" href="#ch6" data-label="I Left Changed"><span></span></a>
+    <a class="dot" href="#epilogue" data-label="Epilogue"><span></span></a>
+  </nav>
+
+  <main id="mainContent">
+
+    <!-- Title, shown once the visitor begins walking -->
 <div class="intro-steps">
   <p class="intro-step is-active" data-step="0">Coming from</p>
   <p class="intro-step" data-step="1">Coming from<br><span class="intro-emph">a city called</span></p>
@@ -214,4 +290,4 @@
   </footer>
 </section>
 
-```
+

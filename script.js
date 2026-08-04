@@ -177,3 +177,143 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+/* ==========================================================
+   NEW WEBSITE INTERACTIONS
+========================================================== */
+
+// ---------- BOOK MODAL ----------
+
+const openBook = document.querySelector(".open-book-btn");
+const bookModal = document.getElementById("bookModal");
+const closeBook = document.querySelector(".close-book");
+
+if(openBook){
+
+openBook.addEventListener("click",()=>{
+
+bookModal.classList.add("active");
+
+});
+
+}
+
+if(closeBook){
+
+closeBook.addEventListener("click",()=>{
+
+bookModal.classList.remove("active");
+
+});
+
+}
+
+window.addEventListener("click",(e)=>{
+
+if(e.target===bookModal){
+
+bookModal.classList.remove("active");
+
+}
+
+});
+
+
+// ---------- VIDEO CAROUSEL ----------
+
+const playButtons=document.querySelectorAll(".play-video");
+
+const videoModal=document.getElementById("videoModal");
+
+const videoPlayer=document.getElementById("chapterVideo");
+
+const videoSource=videoPlayer.querySelector("source");
+
+const closeVideo=document.querySelector(".close-video");
+
+playButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+videoSource.src=btn.dataset.video;
+
+videoPlayer.load();
+
+videoPlayer.play();
+
+videoModal.classList.add("active");
+
+});
+
+});
+
+if(closeVideo){
+
+closeVideo.addEventListener("click",()=>{
+
+videoPlayer.pause();
+
+videoModal.classList.remove("active");
+
+});
+
+}
+
+window.addEventListener("click",(e)=>{
+
+if(e.target===videoModal){
+
+videoPlayer.pause();
+
+videoModal.classList.remove("active");
+
+}
+
+});
+
+
+// ---------- BOARD ZOOM ----------
+
+document.querySelectorAll(".board-image").forEach(img=>{
+
+img.addEventListener("click",()=>{
+
+const overlay=document.createElement("div");
+
+overlay.style.position="fixed";
+
+overlay.style.inset="0";
+
+overlay.style.background="rgba(0,0,0,.92)";
+
+overlay.style.display="flex";
+
+overlay.style.alignItems="center";
+
+overlay.style.justifyContent="center";
+
+overlay.style.zIndex="999999";
+
+const clone=document.createElement("img");
+
+clone.src=img.src;
+
+clone.style.maxWidth="92vw";
+
+clone.style.maxHeight="92vh";
+
+clone.style.cursor="zoom-out";
+
+overlay.appendChild(clone);
+
+overlay.addEventListener("click",()=>{
+
+overlay.remove();
+
+});
+
+document.body.appendChild(overlay);
+
+});
+
+});

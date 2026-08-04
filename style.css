@@ -560,3 +560,355 @@ main { padding-left: 0; }
 @media (max-width: 640px) {
   .dot-nav { display: none; }
 }
+
+/* ==========================================================
+   TANVI WEBSITE FINAL OVERRIDES
+========================================================== */
+
+.identity-label{
+    position:fixed;
+    top:40px;
+    right:50px;
+    z-index:9999;
+
+    font-family:var(--sans);
+    font-size:12px;
+    font-weight:400;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+
+    color:rgba(23,22,15,.72);
+
+    transition:.4s;
+}
+
+.identity-label:hover{
+    opacity:1;
+}
+
+/* -------------------- */
+
+.full-image{
+
+    width:100%;
+    display:block;
+
+    margin:80px 0;
+
+    border-radius:2px;
+
+    transition:.6s ease;
+
+}
+
+.full-image:hover{
+
+    transform:scale(1.01);
+
+}
+
+/* -------------------- */
+
+.board-image{
+
+    width:100%;
+
+    display:block;
+
+    cursor:pointer;
+
+    transition:.4s;
+
+}
+
+.board-image:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* -------------------- */
+
+.chapter-gallery{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+
+    margin:60px 0;
+
+}
+
+.chapter-gallery img{
+
+    width:100%;
+
+    display:block;
+
+}
+
+/* -------------------- */
+
+.chapter-split{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:80px;
+
+    margin-top:80px;
+
+    align-items:start;
+
+}
+
+/* -------------------- */
+
+.media-title{
+
+    font-family:var(--serif);
+
+    font-size:34px;
+
+    font-weight:300;
+
+    margin-bottom:10px;
+
+}
+
+.media-description{
+
+    color:var(--ink-60);
+
+    margin-bottom:40px;
+
+}
+
+/* -------------------- */
+
+.book-cover{
+
+    width:100%;
+
+    display:block;
+
+    cursor:pointer;
+
+}
+
+/* -------------------- */
+
+.open-book-btn{
+
+    margin-top:24px;
+
+    padding:12px 30px;
+
+    background:none;
+
+    border:1px solid var(--ink);
+
+    text-transform:uppercase;
+
+    letter-spacing:.1em;
+
+    font-size:11px;
+
+}
+
+/* -------------------- */
+
+.video-carousel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:28px;
+
+}
+
+.video-card{
+
+    position:relative;
+
+}
+
+.video-thumb{
+
+    width:100%;
+
+    display:block;
+
+}
+
+.play-video{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    padding:12px 24px;
+
+    background:rgba(255,255,255,.92);
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+/* -------------------- */
+
+.chapter-quote{
+
+    margin-top:100px;
+
+    text-align:center;
+
+    font-family:var(--serif);
+
+    font-size:34px;
+
+    line-height:1.5;
+
+    color:var(--ink-60);
+
+    max-width:700px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+/* -------------------- */
+
+.book-modal,
+
+.video-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.94);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.book-modal.active,
+
+.video-modal.active{
+
+    display:flex;
+
+}
+
+.book-pages{
+
+    max-width:1000px;
+
+    width:90%;
+
+}
+
+.book-pages img{
+
+    width:100%;
+
+    display:block;
+
+    margin-bottom:24px;
+
+}
+
+#chapterVideo{
+
+    width:90vw;
+
+    max-width:1200px;
+
+}
+
+.close-book,
+
+.close-video{
+
+    position:absolute;
+
+    top:40px;
+
+    right:60px;
+
+    color:white;
+
+    font-size:40px;
+
+    cursor:pointer;
+
+}
+
+/* -------------------- */
+
+.credits{
+
+    text-align:center;
+
+    padding:220px 40px;
+
+}
+
+.credits h2{
+
+    font-family:var(--serif);
+
+    font-size:70px;
+
+    font-weight:300;
+
+}
+
+.credits p{
+
+    margin:12px 0;
+
+    color:var(--ink-60);
+
+}
+
+@media(max-width:900px){
+
+.chapter-split{
+
+grid-template-columns:1fr;
+
+gap:80px;
+
+}
+
+.identity-label{
+
+right:20px;
+
+top:20px;
+
+font-size:10px;
+
+}
+
+}

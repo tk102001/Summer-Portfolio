@@ -155,23 +155,24 @@ document.addEventListener('DOMContentLoaded', () => {
        4. FLIPBOOK INITIALIZATION
     --------------------------------------------------------------- */
     const initTurnJs = () => {
-    const flipbook = $("#flipbook");
-    
-    // Prevent double initialization
-    if (flipbook.data("turn")) return;
+        const flipbook = $("#flipbook");
+        
+        // Prevent double initialization
+        if (flipbook.data("turn")) return;
 
-    // Add a 50ms delay to allow the modal to become visible 
-    // so Turn.js can accurately calculate dimensions
-    setTimeout(() => {
-        flipbook.turn({
-            width: 1100,
-            height: 720,
-            autoCenter: true,
-            gradients: true,
-            elevation: 60
-        });
-    }, 50);
-};
+        // Add a 50ms delay to allow the modal to become visible 
+        // so Turn.js can accurately calculate dimensions
+        setTimeout(() => {
+            flipbook.turn({
+                width: 1100,
+                height: 720,
+                autoCenter: true,
+                gradients: true,
+                elevation: 60
+            });
+        }, 50);
+    };
+
     // Execute Modules
     initIntro();
     initObservers();

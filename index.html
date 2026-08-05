@@ -126,7 +126,7 @@
             </figure>
             <figure class="captioned-figure reveal">
                 <img src="1. ARRIVAL/columbia butler library.jpeg" class="full-image" alt="Butler Library">
-                <figcaption>Columbia Butler Library</figcaption>
+                <figcaption>Butler Library</figcaption>
             </figure>
             <figure class="captioned-figure reveal">
                 <img src="1. ARRIVAL/gsapp courtyard.jpeg" class="full-image" alt="GSAPP Courtyard">
@@ -147,11 +147,11 @@
             </p>
 
             <figure class="captioned-figure reveal">
-                <button class="map-trigger js-open-board" data-src="2. OBSERVATIONS/dteq ass 1 1.jpg" aria-label="Open Full Screen Board">
-                    <img src="2. OBSERVATIONS/dteq ass 1 1.jpg" class="board-image" alt="DTEQ Working Waterfront Board">
-                    <span class="map-trigger-label">Click to open full screen ↗</span>
-                </button>
+                <img src="2. OBSERVATIONS/dteq ass 1 1.jpg" class="board-image" alt="DTEQ Working Waterfront Board">
                 <figcaption>Working Waterfront</figcaption>
+                <button class="map-trigger js-open-board" data-src="2. OBSERVATIONS/dteq ass 1 1.jpg" aria-label="Open Full Screen Board">
+                    Click to open full screen ↗
+                </button>
             </figure>
 
             <p class="chapter-body reveal">
@@ -179,11 +179,11 @@
             </p>
 
             <figure class="captioned-figure reveal">
-                <button class="map-trigger js-open-board" data-src="3. QUESTIONS/dteq ass 2 2.jpg" aria-label="View Full Board">
-                    <img src="3. QUESTIONS/dteq ass 2 2.jpg" class="board-image" alt="Brooklyn Board">
-                    <span class="map-trigger-label">View Full Board ↗</span>
-                </button>
+                <img src="3. QUESTIONS/dteq ass 2 2.jpg" class="board-image" alt="Brooklyn Board">
                 <figcaption>Working waterfront (Page 2)</figcaption>
+                <button class="map-trigger js-open-board" data-src="3. QUESTIONS/dteq ass 2 2.jpg" aria-label="View Full Board">
+                    View Full Board ↗
+                </button>
             </figure>
 
             <div class="chapter-gallery reveal">
@@ -207,11 +207,11 @@
             </p>
 
             <figure class="captioned-figure reveal">
-                <button class="map-trigger js-open-board" data-src="4. NEW WAYS/studio ass 1.jpg" aria-label="Inspect Board">
-                    <img src="4. NEW WAYS/studio ass 1.jpg" class="board-image" alt="Studio Assignment 1 Board">
-                    <span class="map-trigger-label">Click to Inspect Board ↗</span>
-                </button>
+                <img src="4. NEW WAYS/studio ass 1.jpg" class="board-image" alt="Studio Assignment 1 Board">
                 <figcaption>Constructing The Past<span class="fig-author">by Tanvi Karwa, Yanenowi Logan, Hyun Ki Lee and Christian Guerra</span></figcaption>
+                <button class="map-trigger js-open-board" data-src="4. NEW WAYS/studio ass 1.jpg" aria-label="Inspect Board">
+                    Click to Inspect Board ↗
+                </button>
             </figure>
         </section>
 
@@ -228,11 +228,11 @@
                         Rather than presenting the project as a typical board, we designed it as a 19-page children's book introducing climate change through the story of two siblings exploring Brooklyn.
                     </p>
                     <figure class="captioned-figure">
-                        <button class="book-trigger js-open-book" aria-label="Open Book">
-                            <img src="5. DESIGN/studio ass 2 collection.jpeg" class="book-cover" alt="Brooklyn Forest Friends Cover">
-                            <span class="open-book-btn">Open Book &rarr;</span>
-                        </button>
+                        <img src="5. DESIGN/studio ass 2 collection.jpeg" class="book-cover" alt="Brooklyn Forest Friends Cover">
                         <figcaption>The Standing Now of the Present<span class="fig-author">by Tanvi Karwa, Yanenowi Logan, Hyun Ki Lee and Christian Guerra</span></figcaption>
+                        <button class="book-trigger js-open-book" aria-label="Open Book">
+                            Open Book &rarr;
+                        </button>
                     </figure>
                 </div>
 
@@ -268,11 +268,11 @@
             </p>
 
             <figure class="captioned-figure reveal">
-                <button class="map-trigger js-open-board" data-src="6. CHANGES/studio ass 3 1.jpeg" aria-label="Inspect Board">
-                    <img src="6. CHANGES/studio ass 3 1.jpeg" class="board-image" alt="Final Exhibition Board">
-                    <span class="map-trigger-label">Click to inspect board ↗</span>
-                </button>
+                <img src="6. CHANGES/studio ass 3 1.jpeg" class="board-image" alt="Final Exhibition Board">
                 <figcaption>Plural Futures<span class="fig-author">by Tanvi Karwa, Yanenowi Logan, Hyun Ki Lee and Christian Guerra</span></figcaption>
+                <button class="map-trigger js-open-board" data-src="6. CHANGES/studio ass 3 1.jpeg" aria-label="Inspect Board">
+                    Click to inspect board ↗
+                </button>
             </figure>
 
             <figure class="captioned-figure reveal">
@@ -361,11 +361,9 @@
         <button class="modal-close js-close-modal" aria-label="Close Book">&times;</button>
         <div class="modal-content" style="position: relative; width: 100%; max-width: 1300px;">
             
-            <!-- NEW: Previous Button -->
             <button class="book-nav prev-page" id="prevPageBtn" aria-label="Previous Page">← Prev</button>
 
             <div id="flipbook" class="flipbook-container">
-                <!-- Cover image removed! Starting straight from page 1 -->
                 <div class="page"><img src="5. DESIGN/studio ass 2 1.jpg" alt=""></div>
                 <div class="page"><img src="5. DESIGN/studio ass 2 2.jpg" alt=""></div>
                 <div class="page"><img src="5. DESIGN/studio ass 2 3.jpg" alt=""></div>
@@ -387,19 +385,14 @@
                 <div class="page"><img src="5. DESIGN/studio ass 2 19.jpg" alt=""></div>
             </div>
 
-            <!-- NEW: Next Button -->
             <button class="book-nav next-page" id="nextPageBtn" aria-label="Next Page">Next →</button>
             
         </div>
     </div>
 
-    <!-- 1. Load an older jQuery (Turn.js plays nicely with 2.2.4) -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-    <!-- 2. Load Turn.js from the stable Cloudflare CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
-
-    <!-- 3. Your custom script -->
     <script src="script.js"></script>
 </body>
 </html>

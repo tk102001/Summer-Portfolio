@@ -697,6 +697,39 @@ button {
 }
 
 /* =================================================================
+   BOOK NAVIGATION BUTTONS
+================================================================= */
+.book-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 12px 24px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.book-nav:hover {
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.prev-page { left: 0; }
+.next-page { right: 0; }
+
+@media (max-width: 1400px) {
+    .prev-page { left: 20px; }
+    .next-page { right: 20px; }
+}
+
+/* =================================================================
    RESPONSIVE DESIGN
 ================================================================= */
 @media (max-width: 900px) {

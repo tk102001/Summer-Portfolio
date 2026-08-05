@@ -867,9 +867,9 @@ main { padding-left: 0; }
 
 .book-pages{
 
-    max-width:1000px;
+    width:min(900px,85vw);
 
-    width:90%;
+    margin:0 auto;
 
 }
 
@@ -1028,35 +1028,42 @@ font-size:10px;
 
     display:none;
 
-    justify-content:center;
+    overflow-y:auto;
 
-    align-items:center;
+    overflow-x:hidden;
 
-    z-index:9999;
+    z-index:99999;
+
+    padding:80px 0;
 
 }
 
 .board-viewer.active{
 
-    display:flex;
+    display:block;
 
 }
 
 .board-viewer img{
 
-    max-width:95vw;
+    width:100%;
 
-    max-height:95vh;
+    height:auto;
+
+    display:block;
+
+    margin:0 auto 120px;
+
+    max-width:900px;
 
     object-fit:contain;
 
-    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
 
 }
-
 .board-close{
 
-    position:absolute;
+    position:fixed;
 
     top:30px;
 

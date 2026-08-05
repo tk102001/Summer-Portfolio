@@ -88,8 +88,8 @@ body.intro-active { overflow: hidden; height: 100vh; }
     z-index:999999;
     background:var(--paper);
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     overflow:hidden;
 }
 .intro.is-closing { animation: introOut 0.9s ease forwards; }

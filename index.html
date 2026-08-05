@@ -327,13 +327,14 @@
 </div>
 <!-- All your website content, modals, and the flipbook above this -->
         
-        <!-- 1. Load jQuery first -->
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        
-        <!-- 2. Load Turn.js second -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-        
-        <!-- 3. Load your custom script LAST -->
-        <script src="script.js"></script>
+       <!-- 1. Load an older jQuery (Turn.js plays nicely with 2.2.4) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<!-- 2. Load Turn.js directly from the creator's GitHub -->
+<script src="https://cdn.jsdelivr.net/gh/blasten/turn.js@4/turn.min.js"></script>
+
+<!-- 3. Your custom script -->
+<script src="script.js"></script>
+    
     </body>
 </html>

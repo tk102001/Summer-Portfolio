@@ -1,433 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Summer of Learning How to Read a City</title>
- <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Summer of Learning How to Read a City</title>
+    
+    <!-- Dependencies -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
- <!-- =========================================================
-     IDENTITY LABEL
-========================================================= -->
 
-<div class="identity-label">
-    TANVI KARWA | MSAUD 2026 | COLUMBIA GSAPP
-</div> 
+    <!-- =========================================================
+         IDENTITY LABEL
+    ========================================================= -->
+    <div class="identity-label" aria-hidden="true">
+        TANVI KARWA | MSAUD 2026 | COLUMBIA GSAPP
+    </div> 
 
-  <!-- =============================================================
-       INTRO SEQUENCE
-       A click-through opening. Each click advances .intro-step.
-       Background drawing (Aurangabad) fades/zooms into the Columbia
-       photograph across the sequence. Ends with "Begin Walking",
-       which dismisses the intro and unlocks scrolling.
-       ============================================================= -->
-  <div class="intro" id="intro">
-    <div class="intro-bg intro-bg--drawing" id="introBgDrawing">
-      <!-- Replace: a faint architectural drawing from Aurangabad, very low opacity -->
-     <img src="0. LANDING/CHARETTE.jpg" alt="Aurangabad Drawing">
-    </div>
-    <div class="intro-bg intro-bg--columbia" id="introBgColumbia">
-      <!-- Replace: a Columbia campus / NYC photograph -->
-    <img src="0. LANDING/columbia station.jpeg" alt="Columbia Station">
-    </div>
-
-    <div class="intro-steps">
-      <p class="intro-step is-active" data-step="0">Coming from</p>
-      <p class="intro-step" data-step="1">Coming from<br><span class="intro-emph">a city called</span></p>
-      <p class="intro-step" data-step="2"><span class="intro-emph">Aurangabad, India.</span></p>
-      <p class="intro-step" data-step="3">I thought<br>I knew<br>how to read cities.</p>
-      <p class="intro-step" data-step="4">I arrived<br><span class="intro-emph">in New York.</span></p>
-      <div class="intro-step intro-final" data-step="5">
-        <p>There was only<br>one thing left to do.</p>
-        <p class="intro-emph">Learn how<br>to read the city.</p>
-        <button class="btn-begin" id="btnBegin">Begin Walking</button>
-      </div>
-    </div>
-
-    <button class="intro-advance" id="introAdvance" aria-label="Continue">
-      <span class="intro-advance-dot"></span>
-    </button>
-    <p class="intro-hint">Click to continue</p>
-  </div>
-
-  <!-- =============================================================
-       DOT NAVIGATION
-       Vertical, left edge. Active dot grows. Hover reveals label.
-       ============================================================= -->
-  <nav class="dot-nav" id="dotNav" aria-hidden="true">
-    <a class="dot" href="#ch1" data-label="I Arrived"><span></span></a>
-    <a class="dot" href="#ch2" data-label="I Observed"><span></span></a>
-    <a class="dot" href="#ch3" data-label="I Began Asking Questions"><span></span></a>
-    <a class="dot" href="#ch4" data-label="I Learned New Ways of Seeing"><span></span></a>
-    <a class="dot" href="#ch5" data-label="I Began Designing"><span></span></a>
-    <a class="dot" href="#ch6" data-label="I Left Changed"><span></span></a>
-    <a class="dot" href="#epilogue" data-label="Epilogue"><span></span></a>
-  </nav>
-
-  <main id="mainContent">
-
-
-<header class="essay-title reveal">
-
-    <!-- Background collage -->
-    <div class="hero-collage">
-
-        <img src="0. LANDING/CHARETTE.jpg">
-        <img src="0. LANDING/columbia station.jpeg">
-
-        <img src="1. ARRIVAL/columbia butler library.jpeg">
-        <img src="1. ARRIVAL/columbia cathedral.jpeg">
-        <img src="1. ARRIVAL/columbia courtyard.jpeg">
-        <img src="1. ARRIVAL/gsapp courtyard.jpeg">
-
-        <img src="2. OBSERVATIONS/dteq ass 1 1.jpg">
-        <img src="2. OBSERVATIONS/dteq ass 1 2.jpg">
-        <img src="2. OBSERVATIONS/hudson view.jpeg">
-
-        <img src="3. QUESTIONS/brooklyn waterfront.jpeg">
-        <img src="3. QUESTIONS/brooklyn 1.jpeg">
-        <img src="3. QUESTIONS/brooklyn 4.jpeg">
-        <img src="3. QUESTIONS/dteq ass 2 1.jpg">
-        <img src="3. QUESTIONS/dteq ass 2 2.jpg">
-
-        <img src="4. NEW WAYS/studio ass 1.jpg">
-
-        <img src="5. DESIGN/studio ass 2 collection.jpeg">
-        <img src="5. DESIGN/studio ass 2 1.jpg">
-        <img src="5. DESIGN/studio ass 2 5.jpg">
-        <img src="5. DESIGN/studio ass 2 10.jpg">
-        <img src="5. DESIGN/studio ass 2 15.jpg">
-        <img src="5. DESIGN/studio ass 2 19.jpg">
-
-        <img src="6. CHANGES/studio ass 3 1.jpeg">
-        <img src="6. CHANGES/studio ass 3 2.jpeg">
-        <img src="6. CHANGES/studio ass 3 3.jpeg">
-        <img src="6. CHANGES/studio ass 3 4.jpeg">
-        <img src="6. CHANGES/studio ass 3 5.jpeg">
-
-        <img src="7. EPILOGUE/domino.jpeg">
-        <img src="7. EPILOGUE/google.jpeg">
-        <img src="7. EPILOGUE/highbridge.jpeg">
-        <img src="7. EPILOGUE/ivy townhouse.jpeg">
-        <img src="7. EPILOGUE/lincoln.jpeg">
-        <img src="7. EPILOGUE/lincoln 5.jpeg">
-        <img src="7. EPILOGUE/empire.jpeg">
-
-    </div>
-
-    <!-- Text -->
-    <div class="hero-content">
-
-        <h1>A Summer of Learning How to Read a City</h1>
-
-        <p>
-            A personal reflection on twelve weeks at Columbia GSAPP.
-        </p>
-
-    </div>
-
-</header>
-<!-- =========================================================
-     CHAPTER 01 — I ARRIVED
-     ========================================================= -->
-<section class="chapter" id="ch1">
-  <span class="chapter-index">01</span>
-  <h2 class="chapter-title reveal">I Arrived.</h2>
-  <p class="chapter-lede reveal">
-    The city didn't ask what I already knew. It just kept moving, and I had to decide how fast to catch up.
-  </p>
-
-  <p class="chapter-body reveal">
-    I arrived in New York thinking urban design was about designing cities. Throughout the semester, my team and I returned to the same part of Brooklyn for every major assignment. We walked from DUMBO along the waterfront, through Cobble Hill and Boerum Hill, and up Flatbush Avenue. Revisiting the same streets again and again taught me that cities reveal themselves through repeated observation rather than a single visit.
-  </p>
-
-  <figure class="photo-pause reveal">
-    <img src="1. ARRIVAL/columbia courtyard.jpeg" class="full-image" alt="Arrival">
-  </figure>
-
-  <img src="1. ARRIVAL/columbia butler library.jpeg" class="full-image reveal" alt="Low Library">
-  <img src="1. ARRIVAL/gsapp courtyard.jpeg" class="full-image reveal" alt="GSAPP">
-  <img src="1. ARRIVAL/columbia cathedral.jpeg" class="full-image reveal" alt="Cathedral">
-</section>
-
-<!-- =========================================================
-     CHAPTER 02 — I OBSERVED
-     ========================================================= -->
-<section class="chapter" id="ch2">
-  <span class="chapter-index">02</span>
-  <h2 class="chapter-title reveal">I Observed.</h2>
-  <p class="chapter-lede reveal">
-    Observation became the first real tool I was given. Not sketching — looking, slowly, until the site told me something I hadn't asked it.
-  </p>
-
-  <button class="map-trigger reveal" id="mapTrigger" onclick="openBoard('2. OBSERVATIONS/dteq ass 1 1.jpg')">
-    <img src="2. OBSERVATIONS/dteq ass 1 1.jpg" class="board-image" alt="DTEQ Working Waterfront Board">
-    <span class="map-trigger-label">Click to open full screen ↗</span>
-  </button>
-
-  <p class="chapter-body reveal">
-    The waterfront map took three weeks to feel honest. Every draft before that was still describing the site the way I expected it to look.
-  </p>
-
-  <div class="chapter-gallery reveal">
-    <img src="2. OBSERVATIONS/hudson view.jpeg" alt="Hudson Waterfront Photo 1">
-    <img src="2. OBSERVATIONS/dteq ass 1 2.jpg" alt="Hudson Waterfront Photo 2">
-  </div>
-</section>
-
-<!-- =========================================================
-     CHAPTER 03 — READING BROOKLYN
-     ========================================================= -->
-<section class="chapter" id="ch3">
-  <span class="chapter-index">03</span>
-  <h2 class="chapter-title reveal">Reading Brooklyn</h2>
-  <p class="chapter-lede reveal">
-    By returning to the same neighbourhood through different assignments, I stopped looking for answers and started looking for relationships. Every drawing revealed another layer of how Brooklyn worked.
-  </p>
-
-  <button class="map-trigger reveal" onclick="openBoard('3. QUESTIONS/dteq ass 2 2.jpg')">
-    <img src="3. QUESTIONS/dteq ass 2 2.jpg" class="board-image" alt="Brooklyn Board">
-    <span class="map-trigger-label">View Full Board ↗</span>
-  </button>
-
-  <div class="chapter-gallery reveal">
-    <img src="3. QUESTIONS/brooklyn 1.jpeg" alt="Brooklyn Photo 1">
-    <img src="3. QUESTIONS/brooklyn waterfront.jpeg" alt="Brooklyn Photo 2">
-  </div>
-</section>
-
-<!-- =========================================================
-     CHAPTER 04 — I LEARNED NEW WAYS OF SEEING
-     ========================================================= -->
-<section class="chapter" id="ch4">
-  <span class="chapter-index">04</span>
-  <h2 class="chapter-title reveal">I Learned New Ways of Seeing.</h2>
-  <p class="chapter-lede reveal">
-    Some places revealed themselves only after slowing down. Motion captured relationships that drawings alone could not.
-  </p>
-
-  <button class="map-trigger reveal" onclick="openBoard('4. NEW WAYS/studio ass 1.jpg')">
-    <img src="4. NEW WAYS/studio ass 1.jpg" class="board-image" alt="Studio Assignment 1 Board">
-    <span class="map-trigger-label">Click to Inspect Board ↗</span>
-  </button>
-</section>
-
-<!-- =========================================================
-     CHAPTER 05 — I BEGAN DESIGNING
-========================================================= -->
-
-<section class="chapter" id="ch5">
-
-    <span class="chapter-index">05</span>
-
-    <h2 class="chapter-title reveal">I Began Designing.</h2>
-
-    <div class="chapter-split">
-
-        <!-- ================= LEFT ================= -->
-
-        <div class="book-column reveal">
-
-            <h3 class="media-title">
-                Brooklyn Forest Friends
-            </h3>
-
-            <p class="media-description">
-                Studio Assignment 2
-            </p>
-
-            <p class="chapter-body">
-                Rather than presenting the project as a typical board,
-                we designed it as a 19-page children's book introducing
-                climate change through the story of two siblings exploring
-                Brooklyn.
-            </p>
-         
-<img
-src="5. DESIGN/studio ass 2 collection.jpeg"
-class="book-cover"
-alt="Brooklyn Forest Friends">
-
-<button
-class="open-book-btn"
-onclick="openBook()">
-
-OPEN BOOK →
-
-</button>
+    <!-- =========================================================
+         INTRO SEQUENCE
+    ========================================================= -->
+    <div class="intro" id="intro">
+        <div class="intro-bg intro-bg--drawing">
+            <img src="0. LANDING/CHARETTE.jpg" alt="" aria-hidden="true">
+        </div>
+        <div class="intro-bg intro-bg--columbia">
+            <img src="0. LANDING/columbia station.jpeg" alt="" aria-hidden="true">
         </div>
 
-        <!-- ================= RIGHT ================= -->
-
-        <div class="video-column reveal">
-
-            <h3 class="media-title">
-                Understanding Heat Problems in Brooklyn
-            </h3>
-
-            <p class="media-description">
-                Three short videos exploring heat, comfort and environmental
-                conditions across our Brooklyn study area.
-            </p>
-
-            <video controls class="dteq-video">
-                <source src="5. DESIGN/Dteq Ass 3 1.mp4" type="video/mp4">
-            </video>
-
-            <video controls class="dteq-video">
-                <source src="5. DESIGN/dteq ass 3 2.mp4" type="video/mp4">
-            </video>
-
-            <video controls class="dteq-video">
-                <source src="5. DESIGN/Dteq Ass 3 3.mp4" type="video/mp4">
-            </video>
-
+        <div class="intro-steps">
+            <p class="intro-step is-active" data-step="0">Coming from</p>
+            <p class="intro-step" data-step="1">Coming from<br><span class="intro-emph">a city called</span></p>
+            <p class="intro-step" data-step="2"><span class="intro-emph">Aurangabad, India.</span></p>
+            <p class="intro-step" data-step="3">I thought<br>I knew<br>how to read cities.</p>
+            <p class="intro-step" data-step="4">I arrived<br><span class="intro-emph">in New York.</span></p>
+            <div class="intro-step intro-final" data-step="5">
+                <p>There was only<br>one thing left to do.</p>
+                <p class="intro-emph">Learn how<br>to read the city.</p>
+                <button class="btn-begin" id="btnBegin">Begin Walking</button>
+            </div>
         </div>
 
+        <button class="intro-advance" id="introAdvance" aria-label="Continue">
+            <span class="intro-advance-dot"></span>
+        </button>
+        <p class="intro-hint">Click to continue</p>
     </div>
 
-</section>
-   
-<!-- =========================================================
-     CHAPTER 06 — I LEFT CHANGED
-     ========================================================= -->
-<section class="chapter" id="ch6">
-  <span class="chapter-index">06</span>
-  <h2 class="chapter-title reveal">I Left Changed.</h2>
-  <p class="chapter-lede reveal">
-    The semester didn't leave me with certainty. It left me with better questions, and a different way of looking at cities.
-  </p>
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================= -->
+    <nav class="dot-nav" id="dotNav" aria-label="Chapter Navigation">
+        <a class="dot" href="#ch1" data-label="I Arrived"><span></span></a>
+        <a class="dot" href="#ch2" data-label="I Observed"><span></span></a>
+        <a class="dot" href="#ch3" data-label="Reading Brooklyn"><span></span></a>
+        <a class="dot" href="#ch4" data-label="I Learned New Ways of Seeing"><span></span></a>
+        <a class="dot" href="#ch5" data-label="I Began Designing"><span></span></a>
+        <a class="dot" href="#ch6" data-label="I Left Changed"><span></span></a>
+        <a class="dot" href="#epilogue" data-label="Epilogue"><span></span></a>
+    </nav>
 
-  <button class="map-trigger reveal" onclick="openBoard('6. CHANGES/studio ass 3 1.jpeg')">
-    <img src="6. CHANGES/studio ass 3 1.jpeg" class="board-image" alt="Final Exhibition Board">
-    <span class="map-trigger-label">Click to inspect board ↗</span>
-  </button>
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================= -->
+    <main id="mainContent">
 
-  <div class="video-wrapper reveal" style="text-align: center; margin-top: 40px;">
-    <video controls poster="6. CHANGES/studio ass 3 2.jpeg" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-      <source src="6. CHANGES/Studio Ass 3 Video.mp4" type="video/mp4">
-    </video>
-  </div>
-</section>
+        <!-- HERO -->
+        <header class="hero reveal" id="hero">
+            <div class="hero-collage" aria-hidden="true">
+                <img src="0. LANDING/CHARETTE.jpg" alt="">
+                <img src="0. LANDING/columbia station.jpeg" alt="">
+                <img src="1. ARRIVAL/columbia butler library.jpeg" alt="">
+                <img src="1. ARRIVAL/columbia cathedral.jpeg" alt="">
+                <img src="1. ARRIVAL/columbia courtyard.jpeg" alt="">
+                <img src="1. ARRIVAL/gsapp courtyard.jpeg" alt="">
+                <img src="2. OBSERVATIONS/dteq ass 1 1.jpg" alt="">
+                <img src="2. OBSERVATIONS/dteq ass 1 2.jpg" alt="">
+                <img src="2. OBSERVATIONS/hudson view.jpeg" alt="">
+                <img src="3. QUESTIONS/brooklyn waterfront.jpeg" alt="">
+                <img src="3. QUESTIONS/brooklyn 1.jpeg" alt="">
+                <img src="3. QUESTIONS/brooklyn 4.jpeg" alt="">
+                <img src="3. QUESTIONS/dteq ass 2 1.jpg" alt="">
+                <img src="3. QUESTIONS/dteq ass 2 2.jpg" alt="">
+                <img src="4. NEW WAYS/studio ass 1.jpg" alt="">
+                <img src="5. DESIGN/studio ass 2 collection.jpeg" alt="">
+                <img src="5. DESIGN/studio ass 2 1.jpg" alt="">
+                <img src="5. DESIGN/studio ass 2 5.jpg" alt="">
+                <img src="5. DESIGN/studio ass 2 10.jpg" alt="">
+                <img src="5. DESIGN/studio ass 2 15.jpg" alt="">
+                <img src="5. DESIGN/studio ass 2 19.jpg" alt="">
+                <img src="6. CHANGES/studio ass 3 1.jpeg" alt="">
+                <img src="6. CHANGES/studio ass 3 2.jpeg" alt="">
+                <img src="6. CHANGES/studio ass 3 3.jpeg" alt="">
+                <img src="6. CHANGES/studio ass 3 4.jpeg" alt="">
+                <img src="6. CHANGES/studio ass 3 5.jpeg" alt="">
+                <img src="7. EPILOGUE/domino.jpeg" alt="">
+                <img src="7. EPILOGUE/google.jpeg" alt="">
+                <img src="7. EPILOGUE/highbridge.jpeg" alt="">
+                <img src="7. EPILOGUE/ivy townhouse.jpeg" alt="">
+                <img src="7. EPILOGUE/lincoln.jpeg" alt="">
+                <img src="7. EPILOGUE/lincoln 5.jpeg" alt="">
+                <img src="7. EPILOGUE/empire.jpeg" alt="">
+            </div>
 
-<!-- =========================================================
-     EPILOGUE
-     ========================================================= -->
-<section class="chapter epilogue" id="epilogue">
-  <p class="epilogue-line reveal">The semester ended.</p>
-  <p class="epilogue-line epilogue-emph reveal">The questions didn't.</p>
+            <div class="hero-content">
+                <h1>A Summer of Learning How to Read a City</h1>
+                <p>A personal reflection on twelve weeks at Columbia GSAPP.</p>
+            </div>
+        </header>
 
-  <div class="final-questions reveal">
-    <p>How do we represent a city without simplifying it?</p>
-    <p>How can design make complexity understandable?</p>
-    <p>Can drawings become conversations rather than conclusions?</p>
-    <p>How do we communicate urban systems to people who don't speak the language of planning?</p>
-    <p>If every neighbourhood tells a different story, what does it mean to design for an entire city?</p>
-  </div>
-  
-<div class="epilogue-gallery reveal">
+        <!-- CHAPTER 01 -->
+        <section class="chapter" id="ch1">
+            <span class="chapter-index">01</span>
+            <h2 class="chapter-title reveal">I Arrived.</h2>
+            <p class="chapter-lede reveal">
+                The city didn't ask what I already knew. It just kept moving, and I had to decide how fast to catch up.
+            </p>
+            <p class="chapter-body reveal">
+                I arrived in New York thinking urban design was about designing cities. Throughout the semester, my team and I returned to the same part of Brooklyn for every major assignment. We walked from DUMBO along the waterfront, through Cobble Hill and Boerum Hill, and up Flatbush Avenue. Revisiting the same streets again and again taught me that cities reveal themselves through repeated observation rather than a single visit.
+            </p>
+            
+            <figure class="photo-pause reveal">
+                <img src="1. ARRIVAL/columbia courtyard.jpeg" class="full-image" alt="Columbia Courtyard">
+            </figure>
+            <img src="1. ARRIVAL/columbia butler library.jpeg" class="full-image reveal" alt="Butler Library">
+            <img src="1. ARRIVAL/gsapp courtyard.jpeg" class="full-image reveal" alt="GSAPP Courtyard">
+            <img src="1. ARRIVAL/columbia cathedral.jpeg" class="full-image reveal" alt="Columbia Cathedral">
+        </section>
 
-    <img src="7. EPILOGUE/lincoln.jpeg" class="full-image">
+        <!-- CHAPTER 02 -->
+        <section class="chapter" id="ch2">
+            <span class="chapter-index">02</span>
+            <h2 class="chapter-title reveal">I Observed.</h2>
+            <p class="chapter-lede reveal">
+                Observation became the first real tool I was given. Not sketching — looking, slowly, until the site told me something I hadn't asked it.
+            </p>
 
-    <img src="7. EPILOGUE/google.jpeg" class="full-image">
+            <button class="map-trigger reveal js-open-board" data-src="2. OBSERVATIONS/dteq ass 1 1.jpg" aria-label="Open Full Screen Board">
+                <img src="2. OBSERVATIONS/dteq ass 1 1.jpg" class="board-image" alt="DTEQ Working Waterfront Board">
+                <span class="map-trigger-label">Click to open full screen ↗</span>
+            </button>
 
-    <img src="7. EPILOGUE/highbridge.jpeg" class="full-image">
+            <p class="chapter-body reveal">
+                The waterfront map took three weeks to feel honest. Every draft before that was still describing the site the way I expected it to look.
+            </p>
 
-    <img src="7. EPILOGUE/ivy townhouse.jpeg" class="full-image">
+            <div class="chapter-gallery reveal">
+                <img src="2. OBSERVATIONS/hudson view.jpeg" alt="Hudson Waterfront View">
+                <img src="2. OBSERVATIONS/dteq ass 1 2.jpg" alt="Waterfront Analysis Details">
+            </div>
+        </section>
 
-    <img src="7. EPILOGUE/domino.jpeg" class="full-image">
+        <!-- CHAPTER 03 -->
+        <section class="chapter" id="ch3">
+            <span class="chapter-index">03</span>
+            <h2 class="chapter-title reveal">Reading Brooklyn</h2>
+            <p class="chapter-lede reveal">
+                By returning to the same neighbourhood through different assignments, I stopped looking for answers and started looking for relationships. Every drawing revealed another layer of how Brooklyn worked.
+            </p>
 
-    <img src="7. EPILOGUE/empire.jpeg" class="full-image">
+            <button class="map-trigger reveal js-open-board" data-src="3. QUESTIONS/dteq ass 2 2.jpg" aria-label="View Full Board">
+                <img src="3. QUESTIONS/dteq ass 2 2.jpg" class="board-image" alt="Brooklyn Board">
+                <span class="map-trigger-label">View Full Board ↗</span>
+            </button>
 
-</div>
-  <p class="chapter-body reveal" style="text-align:center; margin:80px auto 0;">
-    I arrived hoping to learn how to design cities.
-    <br><br>
-    I leave wanting to help people read them.
-  </p>
+            <div class="chapter-gallery reveal">
+                <img src="3. QUESTIONS/brooklyn 1.jpeg" alt="Brooklyn Street View">
+                <img src="3. QUESTIONS/brooklyn waterfront.jpeg" alt="Brooklyn Waterfront View">
+            </div>
+        </section>
 
-  <footer class="credits reveal">
-    <h2>Tanvi Karwa</h2>
-    <p>MSAUD 2026 | Columbia GSAPP</p>
-    <p>A Summer of Learning How to Read a City</p>
-    <p>Final Assignment</p>
-    <p>Made in New York. Summer 2026.</p>
-    <p>Designed & Developed by Tanvi Karwa</p>
-    <p>© 2026</p>
-  </footer>
-  <div id="boardViewer" class="board-viewer">
+        <!-- CHAPTER 04 -->
+        <section class="chapter" id="ch4">
+            <span class="chapter-index">04</span>
+            <h2 class="chapter-title reveal">I Learned New Ways of Seeing.</h2>
+            <p class="chapter-lede reveal">
+                Some places revealed themselves only after slowing down. Motion captured relationships that drawings alone could not.
+            </p>
 
-    <span class="board-close" onclick="closeBoard()">&times;</span>
+            <button class="map-trigger reveal js-open-board" data-src="4. NEW WAYS/studio ass 1.jpg" aria-label="Inspect Board">
+                <img src="4. NEW WAYS/studio ass 1.jpg" class="board-image" alt="Studio Assignment 1 Board">
+                <span class="map-trigger-label">Click to Inspect Board ↗</span>
+            </button>
+        </section>
 
-    <img id="boardViewerImage" src="" alt="Board">
+        <!-- CHAPTER 05 -->
+        <section class="chapter" id="ch5">
+            <span class="chapter-index">05</span>
+            <h2 class="chapter-title reveal">I Began Designing.</h2>
 
-</div>
+            <div class="chapter-split reveal">
+                <div class="split-col">
+                    <h3 class="media-title">Brooklyn Forest Friends</h3>
+                    <p class="media-description">Studio Assignment 2</p>
+                    <p class="chapter-body">
+                        Rather than presenting the project as a typical board, we designed it as a 19-page children's book introducing climate change through the story of two siblings exploring Brooklyn.
+                    </p>
+                    <button class="book-trigger js-open-book" aria-label="Open Book">
+                        <img src="5. DESIGN/studio ass 2 collection.jpeg" class="book-cover" alt="Brooklyn Forest Friends Cover">
+                        <span class="open-book-btn">Open Book &rarr;</span>
+                    </button>
+                </div>
 
-<script src="script.js"></script>
+                <div class="split-col">
+                    <h3 class="media-title">Understanding Heat Problems in Brooklyn</h3>
+                    <p class="media-description">
+                        Three short videos exploring heat, comfort and environmental conditions across our Brooklyn study area.
+                    </p>
+                    <div class="video-carousel">
+                        <video controls class="dteq-video">
+                            <source src="5. DESIGN/Dteq Ass 3 1.mp4" type="video/mp4">
+                        </video>
+                        <video controls class="dteq-video">
+                            <source src="5. DESIGN/dteq ass 3 2.mp4" type="video/mp4">
+                        </video>
+                        <video controls class="dteq-video">
+                            <source src="5. DESIGN/Dteq Ass 3 3.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
 
- <!-- =========================================================
-     BOOK MODAL
-========================================================= -->
+        <!-- CHAPTER 06 -->
+        <section class="chapter" id="ch6">
+            <span class="chapter-index">06</span>
+            <h2 class="chapter-title reveal">I Left Changed.</h2>
+            <p class="chapter-lede reveal">
+                The semester didn't leave me with certainty. It left me with better questions, and a different way of looking at cities.
+            </p>
 
-<div id="bookModal" class="book-modal">
+            <button class="map-trigger reveal js-open-board" data-src="6. CHANGES/studio ass 3 1.jpeg" aria-label="Inspect Board">
+                <img src="6. CHANGES/studio ass 3 1.jpeg" class="board-image" alt="Final Exhibition Board">
+                <span class="map-trigger-label">Click to inspect board ↗</span>
+            </button>
 
-    <span class="book-close"
-          onclick="closeBook()">&times;</span>
+            <div class="video-wrapper reveal">
+                <video controls poster="6. CHANGES/studio ass 3 2.jpeg" class="final-video">
+                    <source src="6. CHANGES/Studio Ass 3 Video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
 
-    <div id="flipbook">
+        <!-- EPILOGUE -->
+        <section class="chapter epilogue" id="epilogue">
+            <p class="epilogue-line reveal">The semester ended.</p>
+            <p class="epilogue-line epilogue-emph reveal">The questions didn't.</p>
 
-        <div class="page"><img src="5. DESIGN/studio ass 2 collection.jpeg"></div>
+            <div class="final-questions reveal">
+                <p>How do we represent a city without simplifying it?</p>
+                <p>How can design make complexity understandable?</p>
+                <p>Can drawings become conversations rather than conclusions?</p>
+                <p>How do we communicate urban systems to people who don't speak the language of planning?</p>
+                <p>If every neighbourhood tells a different story, what does it mean to design for an entire city?</p>
+            </div>
+            
+            <div class="epilogue-gallery chapter-gallery reveal">
+                <img src="7. EPILOGUE/lincoln.jpeg" class="full-image" alt="Lincoln">
+                <img src="7. EPILOGUE/google.jpeg" class="full-image" alt="Google">
+                <img src="7. EPILOGUE/highbridge.jpeg" class="full-image" alt="Highbridge">
+                <img src="7. EPILOGUE/ivy townhouse.jpeg" class="full-image" alt="Ivy Townhouse">
+                <img src="7. EPILOGUE/domino.jpeg" class="full-image" alt="Domino Park">
+                <img src="7. EPILOGUE/empire.jpeg" class="full-image" alt="Empire State">
+            </div>
 
-        <div class="page"><img src="5. DESIGN/studio ass 2 1.jpg"></div>
+            <p class="chapter-body final-quote reveal">
+                I arrived hoping to learn how to design cities.<br><br>
+                I leave wanting to help people read them.
+            </p>
+        </section>
 
-        <div class="page"><img src="5. DESIGN/studio ass 2 2.jpg"></div>
+        <!-- CREDITS -->
+        <footer class="credits reveal">
+            <h2>Tanvi Karwa</h2>
+            <p>MSAUD 2026 | Columbia GSAPP</p>
+            <p>A Summer of Learning How to Read a City</p>
+            <p>Final Assignment</p>
+            <p>Made in New York. Summer 2026.</p>
+            <p>Designed & Developed by Tanvi Karwa</p>
+            <p>© 2026</p>
+        </footer>
 
-        <div class="page"><img src="5. DESIGN/studio ass 2 3.jpg"></div>
+    </main>
 
-        <div class="page"><img src="5. DESIGN/studio ass 2 4.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 5.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 6.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 7.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 8.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 9.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 10.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 11.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 12.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 13.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 14.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 15.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 16.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 17.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 18.jpg"></div>
-
-        <div class="page"><img src="5. DESIGN/studio ass 2 19.jpg"></div>
-
+    <!-- =========================================================
+         MODALS
+    ========================================================= -->
+    
+    <!-- Board Viewer -->
+    <div id="boardViewer" class="modal board-modal" aria-hidden="true">
+        <button class="modal-close js-close-modal" aria-label="Close Board">&times;</button>
+        <div class="modal-content">
+            <img id="boardViewerImage" src="" alt="Expanded Board View">
+        </div>
     </div>
 
-</div>
- 
+    <!-- Book Viewer -->
+    <div id="bookModal" class="modal book-modal" aria-hidden="true">
+        <button class="modal-close js-close-modal" aria-label="Close Book">&times;</button>
+        <div class="modal-content">
+            <div id="flipbook" class="flipbook-container">
+                <!-- Pages injected via JS to keep HTML clean -->
+            </div>
+        </div>
+    </div>
+
 </body>
-
 </html>
-
-
-

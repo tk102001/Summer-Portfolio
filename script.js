@@ -1,4 +1,5 @@
-/* =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+   /* =================================================================
    script.js
    Modular interactions for the exhibition site.
 ================================================================= */
@@ -183,3 +184,4 @@ const initTurnJs = () => {
 initIntro();
 initObservers();
 initModals();
+});

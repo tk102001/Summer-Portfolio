@@ -218,47 +218,6 @@ bookModal.classList.remove("active");
 
 });
 
-
-// ---------- VIDEO CAROUSEL ----------
-
-const playButtons=document.querySelectorAll(".play-video");
-
-const videoModal=document.getElementById("videoModal");
-
-const videoPlayer=document.getElementById("chapterVideo");
-
-const videoSource=videoPlayer.querySelector("source");
-
-const closeVideo=document.querySelector(".close-video");
-
-playButtons.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-videoSource.src=btn.dataset.video;
-
-videoPlayer.load();
-
-videoPlayer.play();
-
-videoModal.classList.add("active");
-
-});
-
-});
-
-if(closeVideo){
-
-closeVideo.addEventListener("click",()=>{
-
-videoPlayer.pause();
-
-videoModal.classList.remove("active");
-
-});
-
-}
-
 window.addEventListener("click",(e)=>{
 
 if(e.target===videoModal){

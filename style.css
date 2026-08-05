@@ -761,3 +761,36 @@ button {
         grid-template-columns: 1fr;
     }
 }
+
+/* =================================================================
+   EXHIBITION CAPTIONS
+================================================================= */
+figure.captioned-figure {
+    margin: 80px 0; 
+    width: 100%;
+}
+
+figure.captioned-figure .full-image,
+figure.captioned-figure .video-wrapper {
+    margin: 0 auto; 
+}
+
+/* Let the grid gap handle spacing for gallery images */
+.chapter-gallery figure.captioned-figure {
+    margin: 0; 
+}
+
+figcaption {
+    margin-top: 16px;
+    font-size: 11px;
+    color: #6E6C61;
+    text-align: center;
+    letter-spacing: 0.04em;
+    font-family: var(--sans);
+}
+
+.fig-author {
+    display: block;
+    margin-top: 4px;
+    color: #B9B7AC;
+}

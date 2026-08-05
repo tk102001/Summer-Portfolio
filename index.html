@@ -294,13 +294,16 @@
             <img id="boardViewerImage" src="" alt="Expanded Board View">
         </div>
     </div>
-
-  <!-- Book Viewer -->
+<!-- Book Viewer -->
 <div id="bookModal" class="modal book-modal" aria-hidden="true">
     <button class="modal-close js-close-modal" aria-label="Close Book">&times;</button>
-    <div class="modal-content">
+    <div class="modal-content" style="position: relative; width: 100%; max-width: 1300px;">
+        
+        <!-- NEW: Previous Button -->
+        <button class="book-nav prev-page" id="prevPageBtn" aria-label="Previous Page">← Prev</button>
+
         <div id="flipbook" class="flipbook-container">
-            <div class="page"><img src="5. DESIGN/studio ass 2 collection.jpeg" alt=""></div>
+            <!-- Cover image removed! Starting straight from page 1 -->
             <div class="page"><img src="5. DESIGN/studio ass 2 1.jpg" alt=""></div>
             <div class="page"><img src="5. DESIGN/studio ass 2 2.jpg" alt=""></div>
             <div class="page"><img src="5. DESIGN/studio ass 2 3.jpg" alt=""></div>
@@ -321,7 +324,12 @@
             <div class="page"><img src="5. DESIGN/studio ass 2 18.jpg" alt=""></div>
             <div class="page"><img src="5. DESIGN/studio ass 2 19.jpg" alt=""></div>
         </div>
+
+        <!-- NEW: Next Button -->
+        <button class="book-nav next-page" id="nextPageBtn" aria-label="Next Page">Next →</button>
+        
     </div>
+</div>
 </div>
 <!-- All your website content, modals, and the flipbook above this -->
         

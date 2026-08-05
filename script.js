@@ -1,208 +1,203 @@
-document.addEventListener('DOMContentLoaded', () => {
-   /* =================================================================
+/* =================================================================
    script.js
    Modular interactions for the exhibition site.
 ================================================================= */
 
-/* ---------------------------------------------------------------
-   1. INTRO SEQUENCE
---------------------------------------------------------------- */
-const initIntro = () => {
-    const intro = document.getElementById('intro');
-    if (!intro) return;
+document.addEventListener('DOMContentLoaded', () => {
 
-    const introSteps = document.querySelectorAll('.intro-step');
-    const introAdvance = document.getElementById('introAdvance');
-    const btnBegin = document.getElementById('btnBegin');
-    const dotNav = document.getElementById('dotNav');
+    /* ---------------------------------------------------------------
+       1. INTRO SEQUENCE
+    --------------------------------------------------------------- */
+    const initIntro = () => {
+        const intro = document.getElementById('intro');
+        if (!intro) return;
 
-    let step = 0;
-    const lastStep = introSteps.length - 1;
+        const introSteps = document.querySelectorAll('.intro-step');
+        const introAdvance = document.getElementById('introAdvance');
+        const btnBegin = document.getElementById('btnBegin');
+        const dotNav = document.getElementById('dotNav');
 
-    document.body.classList.add('intro-active');
+        let step = 0;
+        const lastStep = introSteps.length - 1;
 
-    const renderStep = () => {
-        introSteps.forEach(el => {
-            el.classList.toggle('is-active', Number(el.dataset.step) === step);
+        document.body.classList.add('intro-active');
+
+        const renderStep = () => {
+            introSteps.forEach(el => {
+                el.classList.toggle('is-active', Number(el.dataset.step) === step);
+            });
+            intro.className = 'intro step-' + step;
+        };
+        
+        renderStep();
+
+        const advanceIntro = () => {
+            if (step < lastStep) {
+                step += 1;
+                renderStep();
+            }
+        };
+
+        intro.addEventListener('click', (e) => {
+            if (e.target.closest('#btnBegin')) return;
+            advanceIntro();
         });
-        intro.className = 'intro step-' + step;
-    };
-    
-    renderStep();
 
-    const advanceIntro = () => {
-        if (step < lastStep) {
-            step += 1;
-            renderStep();
+        if (introAdvance) {
+            introAdvance.addEventListener('click', (e) => {
+                e.stopPropagation();
+                advanceIntro();
+            });
+        }
+
+        if (btnBegin) {
+            btnBegin.addEventListener('click', (e) => {
+                e.stopPropagation();
+                intro.classList.add('is-closing');
+                document.body.classList.remove('intro-active');
+                if (dotNav) dotNav.classList.add('is-visible');
+                setTimeout(() => { intro.style.display = 'none'; }, 900);
+            });
         }
     };
 
-    intro.addEventListener('click', (e) => {
-        if (e.target.closest('#btnBegin')) return;
-        advanceIntro();
-    });
+    /* ---------------------------------------------------------------
+       2. SCROLL NAVIGATION & REVEAL
+    --------------------------------------------------------------- */
+    const initObservers = () => {
+        const dots = document.querySelectorAll('.dot');
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    dots.forEach(d => d.classList.toggle('is-active', d.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
 
-    if (introAdvance) {
-        introAdvance.addEventListener('click', (e) => {
-            e.stopPropagation();
-            advanceIntro();
+        document.querySelectorAll('.chapter, .hero').forEach(s => {
+            if (s.id) navObserver.observe(s);
         });
-    }
 
-    if (btnBegin) {
-        btnBegin.addEventListener('click', (e) => {
-            e.stopPropagation();
-            intro.classList.add('is-closing');
-            document.body.classList.remove('intro-active');
-            if (dotNav) dotNav.classList.add('is-visible');
-            setTimeout(() => { intro.style.display = 'none'; }, 900);
-        });
-    }
-};
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
-/* ---------------------------------------------------------------
-   2. SCROLL NAVIGATION & REVEAL
---------------------------------------------------------------- */
-const initObservers = () => {
-    // Dot Navigation Active State
-    const dots = document.querySelectorAll('.dot');
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                dots.forEach(d => d.classList.toggle('is-active', d.getAttribute('href') === '#' + id));
-            }
-        });
-    }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
-
-    document.querySelectorAll('.chapter, .hero').forEach(s => {
-        if (s.id) navObserver.observe(s);
-    });
-
-    // Scroll Reveal Animation
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-};
-
-/* ---------------------------------------------------------------
-   3. MODAL CONTROLLER (BOARD & BOOK)
---------------------------------------------------------------- */
-const initModals = () => {
-    const boardModal = document.getElementById('boardViewer');
-    const boardImage = document.getElementById('boardViewerImage');
-    const bookModal = document.getElementById('bookModal');
-    
-    // Open Board
-    document.querySelectorAll('.js-open-board').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const src = trigger.getAttribute('data-src');
-            if (src && boardImage) {
-                boardImage.src = src;
-                if (boardModal) boardModal.classList.add('is-active');
-                document.body.classList.add('modal-active');
-            }
-        });
-    });
-
-    // Open Book
-    document.querySelectorAll('.js-open-book').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (bookModal) bookModal.classList.add('is-active');
-            document.body.classList.add('modal-active');
-            initTurnJs();
-        });
-    });
-
-    // Universal Close Logic
-    const closeModals = () => {
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.classList.remove('is-active');
-        });
-        document.body.classList.remove('modal-active');
-        
-        // Pause any playing videos when closing modals
-        document.querySelectorAll('video').forEach(video => video.pause());
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     };
 
-    // Close on Button Click
-    document.querySelectorAll('.js-close-modal').forEach(btn => {
-        btn.addEventListener('click', closeModals);
-    });
-
-    // Close on Background Click
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal || e.target.classList.contains('modal-content')) {
-                closeModals();
-            }
-        });
-    });
-
-    // Close on Escape Key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModals();
-    });
-};
-
-/* ---------------------------------------------------------------
-   4. FLIPBOOK INITIALIZATION
---------------------------------------------------------------- */
-const initTurnJs = () => {
-    if (typeof $ === 'undefined') {
-        console.error("jQuery is missing, Turn.js cannot run.");
-        return;
-    }
-    
-    const flipbook = $("#flipbook");
-    if (!flipbook.length) return;
-    
-    if (flipbook.data("turn")) return;
-
-    // Increased delay to 600ms to guarantee the modal's 0.4s CSS fade is 100% finished
-    setTimeout(() => {
-        flipbook.turn({
-            width: 1100,
-            height: 720,
-            autoCenter: true,
-            gradients: true,
-            elevation: 60,
-            display: 'double'
-        });
-
-        // 1. Better Click Navigation
-        flipbook.off('click').on('click', function(e) {
-            const offset = $(this).offset();
-            const clickX = e.pageX - offset.left;
-            
-            // If clicked on the left half, go back. If right half, go forward.
-            if (clickX < $(this).width() / 2) {
-                $(this).turn("previous");
-            } else {
-                $(this).turn("next");
-            }
-        });
-
-        // 2. Keyboard Navigation Fallback
-        $(document).off('keydown.flipbook').on('keydown.flipbook', function(e) {
-            // Only trigger if the book modal is currently active
-            if (document.getElementById('bookModal').classList.contains('is-active')) {
-                if (e.keyCode === 37) { // Left Arrow
-                    flipbook.turn('previous');
-                } else if (e.keyCode === 39) { // Right Arrow
-                    flipbook.turn('next');
+    /* ---------------------------------------------------------------
+       3. MODAL CONTROLLER (BOARD & BOOK)
+    --------------------------------------------------------------- */
+    const initModals = () => {
+        const boardModal = document.getElementById('boardViewer');
+        const boardImage = document.getElementById('boardViewerImage');
+        const bookModal = document.getElementById('bookModal');
+        
+        document.querySelectorAll('.js-open-board').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const src = trigger.getAttribute('data-src');
+                if (src && boardImage) {
+                    boardImage.src = src;
+                    if (boardModal) boardModal.classList.add('is-active');
+                    document.body.classList.add('modal-active');
                 }
-            }
+            });
         });
 
-    }, 600); 
-};
+        document.querySelectorAll('.js-open-book').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (bookModal) bookModal.classList.add('is-active');
+                document.body.classList.add('modal-active');
+                initTurnJs();
+            });
+        });
+
+        const closeModals = () => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('is-active');
+            });
+            document.body.classList.remove('modal-active');
+            document.querySelectorAll('video').forEach(video => video.pause());
+        };
+
+        document.querySelectorAll('.js-close-modal').forEach(btn => {
+            btn.addEventListener('click', closeModals);
+        });
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.classList.contains('modal-content')) {
+                    closeModals();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModals();
+        });
+    };
+
+    /* ---------------------------------------------------------------
+       4. FLIPBOOK INITIALIZATION
+    --------------------------------------------------------------- */
+    const initTurnJs = () => {
+        if (typeof $ === 'undefined') {
+            console.error("jQuery is missing, Turn.js cannot run.");
+            return;
+        }
+        
+        const flipbook = $("#flipbook");
+        if (!flipbook.length) return;
+        
+        if (flipbook.data("turn")) return;
+
+        setTimeout(() => {
+            flipbook.turn({
+                width: 1100,
+                height: 720,
+                autoCenter: true,
+                gradients: true,
+                elevation: 60,
+                display: 'double'
+            });
+
+            // 1. Better Click Navigation
+            flipbook.off('click').on('click', function(e) {
+                const offset = $(this).offset();
+                const clickX = e.pageX - offset.left;
+                
+                if (clickX < $(this).width() / 2) {
+                    $(this).turn("previous");
+                } else {
+                    $(this).turn("next");
+                }
+            });
+
+            // 2. Keyboard Navigation Fallback
+            $(document).off('keydown.flipbook').on('keydown.flipbook', function(e) {
+                if (document.getElementById('bookModal').classList.contains('is-active')) {
+                    if (e.keyCode === 37) { // Left Arrow
+                        flipbook.turn('previous');
+                    } else if (e.keyCode === 39) { // Right Arrow
+                        flipbook.turn('next');
+                    }
+                }
+            });
+
+        }, 600); 
+    };
+
+    // Execute Modules
+    initIntro();
+    initObservers();
+    initModals();
+
+});

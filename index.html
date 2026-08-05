@@ -160,68 +160,75 @@
 
 <!-- =========================================================
      CHAPTER 05 — I BEGAN DESIGNING
-     ========================================================= -->
+========================================================= -->
+
 <section class="chapter" id="ch5">
-  <span class="chapter-index">05</span>
-  <h2 class="chapter-title reveal">I Began Designing.</h2>
 
-  <div class="chapter-split reveal">
-    <!-- LEFT COLUMN -->
-    <div class="book-column">
-      <h3 class="media-title">Brooklyn Forest Friends</h3>
-      <p class="media-description">
-Brooklyn Forest Friends was our Studio Assignment 2 publication. Rather than presenting the project as a single board, we designed it as a 19-page illustrated booklet that introduces children to Brooklyn's urban ecology through storytelling, mapping and play. Click below to read the complete book.
-</p>
+    <span class="chapter-index">05</span>
 
-      <div class="book-wrapper">
+    <h2 class="chapter-title reveal">I Began Designing.</h2>
 
-    <img src="5. DESIGN/studio ass 2 collection.jpeg"
-         class="book-cover"
-         alt="Brooklyn Forest Friends">
+    <div class="chapter-split">
 
-    <button class="open-book-btn"
-            onclick="document.getElementById('bookViewer').classList.add('active')">
+        <!-- ================= LEFT ================= -->
 
-        Open Book →
+        <div class="book-column reveal">
 
-    </button>
+            <h3 class="media-title">
+                Brooklyn Forest Friends
+            </h3>
 
-</div>
+            <p class="media-description">
+                Studio Assignment 2
+            </p>
 
-    <!-- RIGHT COLUMN -->
-    <div class="video-column">
-      <h3 class="media-title">Understanding Heat Problems in Brooklyn</h3> 
-      <p class="media-description">
-        Three short videos exploring heat, comfort and environmental conditions across our Brooklyn study area.
-      </p>
+            <p class="chapter-body">
+                Rather than presenting the project as a typical board,
+                we designed it as a 19-page children's book introducing
+                climate change through the story of two siblings exploring
+                Brooklyn.
+            </p>
 
-      <div class="video-carousel">
+            <button class="open-book-btn"
+                    onclick="document.getElementById('bookModal').classList.add('active')">
 
-    <video controls class="dteq-video">
-        <source src="5. DESIGN/Dteq Ass 3 1.mp4" type="video/mp4">
-    </video>
+                OPEN BOOK →
 
-    <video controls class="dteq-video">
-        <source src="5. DESIGN/dteq ass 3 2.mp4" type="video/mp4">
-    </video>
+            </button>
 
-    <video controls class="dteq-video">
-        <source src="5. DESIGN/Dteq Ass 3 3.mp4" type="video/mp4">
-    </video>
+        </div>
 
-</div>
+        <!-- ================= RIGHT ================= -->
 
-</div> <!-- video-carousel -->
+        <div class="video-column reveal">
 
-</div> <!-- video-column -->
+            <h3 class="media-title">
+                Understanding Heat Problems in Brooklyn
+            </h3>
 
-</div> <!-- chapter-split -->
+            <p class="media-description">
+                Three short videos exploring heat, comfort and environmental
+                conditions across our Brooklyn study area.
+            </p>
 
-<blockquote class="chapter-quote reveal">
-    Every assignment asked me to represent the city differently. Together they changed how I learned to see.
-  </blockquote>
+            <video controls class="dteq-video">
+                <source src="5. DESIGN/Dteq Ass 3 1.mp4" type="video/mp4">
+            </video>
+
+            <video controls class="dteq-video">
+                <source src="5. DESIGN/dteq ass 3 2.mp4" type="video/mp4">
+            </video>
+
+            <video controls class="dteq-video">
+                <source src="5. DESIGN/Dteq Ass 3 3.mp4" type="video/mp4">
+            </video>
+
+        </div>
+
+    </div>
+
 </section>
-
+   
 <!-- =========================================================
      CHAPTER 06 — I LEFT CHANGED
      ========================================================= -->
@@ -296,69 +303,67 @@ Brooklyn Forest Friends was our Studio Assignment 2 publication. Rather than pre
     <img id="boardViewerImage" src="" alt="Board">
 
 </div>
-<!-- ==========================================================
-BOOK VIEWER
-========================================================== -->
 
-<div id="bookViewer" class="board-viewer">
+<script src="script.js"></script>
 
-    <span class="board-close"
-          onclick="document.getElementById('bookViewer').classList.remove('active')">
+ <!-- =========================================================
+     BOOK MODAL
+========================================================= -->
+
+<div id="bookModal" class="book-modal">
+
+    <span class="book-close"
+          onclick="document.getElementById('bookModal').classList.remove('active')">
 
         &times;
 
     </span>
-<h2 class="book-title">
-    Brooklyn Forest Friends
-</h2>
 
-<p class="book-subtitle">
-    Studio Assignment 2 · 19-page illustrated booklet
-</p>
-    <div class="book-pages">
+    <div id="flipbook">
 
-        <img src="5. DESIGN/studio ass 2 1.jpg">
+        <div><img src="5. DESIGN/studio ass 2 collection.jpeg"></div>
 
-        <img src="5. DESIGN/studio ass 2 2.jpg">
+        <div><img src="5. DESIGN/studio ass 2 1.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 3.jpg">
+        <div><img src="5. DESIGN/studio ass 2 2.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 4.jpg">
+        <div><img src="5. DESIGN/studio ass 2 3.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 5.jpg">
+        <div><img src="5. DESIGN/studio ass 2 4.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 6.jpg">
+        <div><img src="5. DESIGN/studio ass 2 5.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 7.jpg">
+        <div><img src="5. DESIGN/studio ass 2 6.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 8.jpg">
+        <div><img src="5. DESIGN/studio ass 2 7.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 9.jpg">
+        <div><img src="5. DESIGN/studio ass 2 8.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 10.jpg">
+        <div><img src="5. DESIGN/studio ass 2 9.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 11.jpg">
+        <div><img src="5. DESIGN/studio ass 2 10.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 12.jpg">
+        <div><img src="5. DESIGN/studio ass 2 11.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 13.jpg">
+        <div><img src="5. DESIGN/studio ass 2 12.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 14.jpg">
+        <div><img src="5. DESIGN/studio ass 2 13.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 15.jpg">
+        <div><img src="5. DESIGN/studio ass 2 14.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 16.jpg">
+        <div><img src="5. DESIGN/studio ass 2 15.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 17.jpg">
+        <div><img src="5. DESIGN/studio ass 2 16.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 18.jpg">
+        <div><img src="5. DESIGN/studio ass 2 17.jpg"></div>
 
-        <img src="5. DESIGN/studio ass 2 19.jpg">
+        <div><img src="5. DESIGN/studio ass 2 18.jpg"></div>
+
+        <div><img src="5. DESIGN/studio ass 2 19.jpg"></div>
 
     </div>
 
 </div>
-<script src="script.js"></script>
 
 </body>
 

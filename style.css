@@ -455,13 +455,26 @@ main { padding-left: 0; }
   aspect-ratio: 4/3;
   perspective: 1800px;
 }
-.book-page {
-  position: absolute;
-  inset: 0;
-  transform-origin: left center;
-  transition: transform 0.85s cubic-bezier(0.65, 0, 0.35, 1);
-  backface-visibility: hidden;
-  z-index: 1;
+.book-pages{
+
+    width:min(1100px,90vw);
+
+    margin:auto;
+
+    padding:80px 0;
+
+}
+
+.book-pages img{
+
+    width:100%;
+
+    display:block;
+
+    margin-bottom:80px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.15);
+
 }
 .book-page[data-page="0"] { z-index: 4; }
 .book-page[data-page="1"] { z-index: 3; }

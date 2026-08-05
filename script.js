@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
- /* ---------------------------------------------------------------
+    /* ---------------------------------------------------------------
        4. FLIPBOOK INITIALIZATION
     --------------------------------------------------------------- */
     const initTurnJs = () => {
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             flipbook.turn({
-                width: 1200, // Widened to better fit a 2-page spread
+                width: 1200, 
                 height: 650,
                 autoCenter: true,
                 gradients: true,
@@ -214,3 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }, 600); 
     };
+
+    // Execute Modules
+    initIntro();
+    initObservers();
+    initModals();
+
+});

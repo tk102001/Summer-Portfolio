@@ -292,11 +292,24 @@ body.intro-active { overflow: hidden; height: 100vh; }
    ================================================================= */
 main { padding-left: 0; }
 
-.essay-title {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: clamp(120px, 18vw, 220px) var(--gutter) clamp(60px, 10vw, 120px);
-  text-align: center;
+.essay-title{
+
+max-width:900px;
+
+margin:0 auto;
+
+padding:80px var(--gutter) 30px;
+
+text-align:center;
+
+min-height:60vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
 }
 .essay-title h1 {
   font-family: var(--serif);
@@ -764,7 +777,15 @@ main { padding-left: 0; }
 }
 
 .book-modal.active{
-    display:flex;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
 }
 
 .book-close{

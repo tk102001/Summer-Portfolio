@@ -769,40 +769,6 @@ main { padding-left: 0; }
 
 }
 
-.video-card{
-
-    position:relative;
-
-}
-
-.video-thumb{
-
-    width:100%;
-
-    display:block;
-
-}
-
-.play-video{
-
-    position:absolute;
-
-    left:50%;
-
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    padding:12px 24px;
-
-    background:rgba(255,255,255,.92);
-
-    border:none;
-
-    cursor:pointer;
-
-}
-
 /* -------------------- */
 
 .chapter-quote{
@@ -1053,6 +1019,7 @@ font-size:10px;
     box-shadow:0 20px 60px rgba(0,0,0,.35);
 
 }
+
 .board-close{
 
     position:fixed;
@@ -1068,5 +1035,19 @@ font-size:10px;
     cursor:pointer;
 
     font-weight:300;
+
+}
+
+.dteq-video{
+
+    width:100%;
+
+    display:block;
+
+    margin-bottom:32px;
+
+    border-radius:4px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
 
 }

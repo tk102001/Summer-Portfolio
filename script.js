@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-  /* ---------------------------------------------------------------
+ /* ---------------------------------------------------------------
        4. FLIPBOOK INITIALIZATION
     --------------------------------------------------------------- */
     const initTurnJs = () => {
@@ -161,16 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             flipbook.turn({
-                width: 1100,
-                height: 720,
+                width: 1200, // Widened to better fit a 2-page spread
+                height: 650,
                 autoCenter: true,
                 gradients: true,
                 elevation: 60,
-                // CHANGED TO SINGLE: Because your images are already 2-page spreads!
                 display: 'single' 
             });
 
-            // 1. Better Click Navigation (Clicking the page itself)
+            // BRUTE FORCE: Force single display again immediately after load
+            flipbook.turn("display", "single");
+
+            // 1. Better Click Navigation
             flipbook.off('click').on('click', function(e) {
                 const offset = $(this).offset();
                 const clickX = e.pageX - offset.left;
@@ -182,24 +184,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // 2. Keyboard Navigation Fallback (Arrows)
+            // 2. Keyboard Navigation Fallback
             $(document).off('keydown.flipbook').on('keydown.flipbook', function(e) {
                 if (document.getElementById('bookModal').classList.contains('is-active')) {
-                    if (e.keyCode === 37) { // Left Arrow
+                    if (e.keyCode === 37) {
                         flipbook.turn('previous');
-                    } else if (e.keyCode === 39) { // Right Arrow
+                    } else if (e.keyCode === 39) {
                         flipbook.turn('next');
                     }
                 }
             });
 
-            // 3. NEW: UI Button Navigation
+            // 3. UI Button Navigation
             const prevBtn = document.getElementById('prevPageBtn');
             const nextBtn = document.getElementById('nextPageBtn');
             
             if (prevBtn) {
                 prevBtn.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevents clicking the modal background
+                    e.stopPropagation(); 
                     flipbook.turn('previous');
                 });
             }

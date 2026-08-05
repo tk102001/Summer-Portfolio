@@ -105,7 +105,7 @@ body.intro-active { overflow: hidden; height: 100vh; }
   transition: opacity 1.4s ease, transform 6s ease;
 }
 .intro-bg--drawing {
-  opacity: 0.14;
+  opacity: 15;
   background: repeating-linear-gradient(115deg, #E5E2D6, #E5E2D6 1px, transparent 1px, transparent 26px),
               repeating-linear-gradient(25deg, #E5E2D6, #E5E2D6 1px, transparent 1px, transparent 26px);
 }
@@ -115,7 +115,7 @@ body.intro-active { overflow: hidden; height: 100vh; }
 
 .intro-bg--columbia {
   background: #E8E6DC;
-  opacity: 0;
+  opacity: 30;
 }
 .intro.step-4 .intro-bg--columbia,
 .intro.step-5 .intro-bg--columbia { opacity: 1; }

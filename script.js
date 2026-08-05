@@ -158,17 +158,17 @@ const initModals = () => {
    4. FLIPBOOK INITIALIZATION
 --------------------------------------------------------------- */
 const initTurnJs = () => {
-    // Only run if jQuery is loaded to prevent fatal errors
-    if (typeof $ === 'undefined') return;
+    if (typeof $ === 'undefined') {
+        console.error("jQuery is missing, Turn.js cannot run.");
+        return;
+    }
     
     const flipbook = $("#flipbook");
     if (!flipbook.length) return;
     
-    // Prevent double initialization
     if (flipbook.data("turn")) return;
 
-    // Increase delay to 450ms to wait for the CSS modal fade-in (0.4s) to finish completely.
-    // Turn.js needs the element to be 100% visible to calculate page turns correctly.
+    // Increased delay to 600ms to guarantee the modal's 0.4s CSS fade is 100% finished
     setTimeout(() => {
         flipbook.turn({
             width: 1100,
@@ -176,18 +176,33 @@ const initTurnJs = () => {
             autoCenter: true,
             gradients: true,
             elevation: 60,
-            display: 'double' // Forces the 2-page spread look
+            display: 'double'
         });
 
-        // Add easy click-to-turn navigation
-        flipbook.bind("click", function(e) {
-            // Calculate if the user clicked the left or right half of the book
-            const clickX = e.pageX - $(this).offset().left;
+        // 1. Better Click Navigation
+        flipbook.off('click').on('click', function(e) {
+            const offset = $(this).offset();
+            const clickX = e.pageX - offset.left;
+            
+            // If clicked on the left half, go back. If right half, go forward.
             if (clickX < $(this).width() / 2) {
-                $(this).turn("previous"); // Clicked left, go back
+                $(this).turn("previous");
             } else {
-                $(this).turn("next"); // Clicked right, go forward
+                $(this).turn("next");
             }
         });
-    }, 450); 
+
+        // 2. Keyboard Navigation Fallback
+        $(document).off('keydown.flipbook').on('keydown.flipbook', function(e) {
+            // Only trigger if the book modal is currently active
+            if (document.getElementById('bookModal').classList.contains('is-active')) {
+                if (e.keyCode === 37) { // Left Arrow
+                    flipbook.turn('previous');
+                } else if (e.keyCode === 39) { // Right Arrow
+                    flipbook.turn('next');
+                }
+            }
+        });
+
+    }, 600); 
 };

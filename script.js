@@ -167,21 +167,27 @@ const initTurnJs = () => {
     // Prevent double initialization
     if (flipbook.data("turn")) return;
 
-    // Add a 50ms delay to allow the modal to become visible 
-    // so Turn.js can accurately calculate dimensions
+    // Increase delay to 450ms to wait for the CSS modal fade-in (0.4s) to finish completely.
+    // Turn.js needs the element to be 100% visible to calculate page turns correctly.
     setTimeout(() => {
         flipbook.turn({
             width: 1100,
             height: 720,
             autoCenter: true,
             gradients: true,
-            elevation: 60
+            elevation: 60,
+            display: 'double' // Forces the 2-page spread look
         });
-    }, 50);
-};
 
-// Execute Modules
-initIntro();
-initObservers();
-initModals();
-});
+        // Add easy click-to-turn navigation
+        flipbook.bind("click", function(e) {
+            // Calculate if the user clicked the left or right half of the book
+            const clickX = e.pageX - $(this).offset().left;
+            if (clickX < $(this).width() / 2) {
+                $(this).turn("previous"); // Clicked left, go back
+            } else {
+                $(this).turn("next"); // Clicked right, go forward
+            }
+        });
+    }, 450); 
+};

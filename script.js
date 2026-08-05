@@ -140,31 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
      Pages flip via rotateY. "page" 0 = cover, N = how many pages
      are currently flipped open.
      --------------------------------------------------------------- */
-  const bookPages = document.querySelectorAll('.book-page');
-  const bookPrev = document.getElementById('bookPrev');
-  const bookNext = document.getElementById('bookNext');
-  const bookPageLabel = document.getElementById('bookPageLabel');
-  const pageLabels = ['Cover', 'Page 1', 'Page 2', 'Page 3', 'Back cover'];
-
-  let currentPage = 0;
-  const totalPages = bookPages.length;
-
-  function renderBook() {
-    bookPages.forEach((pg, i) => {
-      pg.classList.toggle('is-flipped', i < currentPage);
-    });
-    bookPageLabel.textContent = pageLabels[currentPage] || '';
-    bookPrev.disabled = currentPage === 0;
-    bookNext.disabled = currentPage >= totalPages;
-  }
-  renderBook();
-
-  bookNext.addEventListener('click', () => {
-    if (currentPage < totalPages) { currentPage += 1; renderBook(); }
-  });
-  bookPrev.addEventListener('click', () => {
-    if (currentPage > 0) { currentPage -= 1; renderBook(); }
-  });
+  
 
   /* ---------------------------------------------------------------
      8. CHAPTER 6 — EXPANDING REFLECTION CARDS
@@ -181,43 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ==========================================================
    NEW WEBSITE INTERACTIONS
 ========================================================== */
-
-// ---------- BOOK MODAL ----------
-
-const openBook = document.querySelector(".open-book-btn");
-const bookModal = document.getElementById("bookModal");
-const closeBook = document.querySelector(".close-book");
-
-if(openBook){
-
-openBook.addEventListener("click",()=>{
-
-bookModal.classList.add("active");
-
-});
-
-}
-
-if(closeBook){
-
-closeBook.addEventListener("click",()=>{
-
-bookModal.classList.remove("active");
-
-});
-
-}
-
-window.addEventListener("click",(e)=>{
-
-if(e.target===bookModal){
-
-bookModal.classList.remove("active");
-
-}
-
-});
-
 window.addEventListener("click",(e)=>{
 
 if(e.target===videoModal){
@@ -307,6 +246,40 @@ document
     if(e.target===this){
 
         closeBoard();
+
+    }
+
+});
+
+function openBook() {
+
+    document.getElementById("bookModal").classList.add("active");
+
+    if (!$("#flipbook").data("turn")) {
+
+        $("#flipbook").turn({
+            width:1100,
+            height:720,
+            autoCenter:true,
+            gradients:true,
+            elevation:60
+        });
+
+    }
+
+}
+
+function closeBook() {
+
+    document.getElementById("bookModal").classList.remove("active");
+
+}
+
+document.getElementById("bookModal").addEventListener("click", function(e){
+
+    if(e.target===this){
+
+        closeBook();
 
     }
 

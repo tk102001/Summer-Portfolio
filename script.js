@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    /* ---------------------------------------------------------------
+  /* ---------------------------------------------------------------
        4. FLIPBOOK INITIALIZATION
     --------------------------------------------------------------- */
     const initTurnJs = () => {
@@ -166,10 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 autoCenter: true,
                 gradients: true,
                 elevation: 60,
-                display: 'double'
+                // CHANGED TO SINGLE: Because your images are already 2-page spreads!
+                display: 'single' 
             });
 
-            // 1. Better Click Navigation
+            // 1. Better Click Navigation (Clicking the page itself)
             flipbook.off('click').on('click', function(e) {
                 const offset = $(this).offset();
                 const clickX = e.pageX - offset.left;
@@ -181,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // 2. Keyboard Navigation Fallback
+            // 2. Keyboard Navigation Fallback (Arrows)
             $(document).off('keydown.flipbook').on('keydown.flipbook', function(e) {
                 if (document.getElementById('bookModal').classList.contains('is-active')) {
                     if (e.keyCode === 37) { // Left Arrow
@@ -192,12 +193,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // 3. NEW: UI Button Navigation
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevents clicking the modal background
+                    flipbook.turn('previous');
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    flipbook.turn('next');
+                });
+            }
+
         }, 600); 
     };
-
-    // Execute Modules
-    initIntro();
-    initObservers();
-    initModals();
-
-});

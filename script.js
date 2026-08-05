@@ -1,286 +1,209 @@
 /* =================================================================
    script.js
-   All interactions for the exhibition site. Organized by section —
-   each block is independent, so you can lift/modify one without
-   touching the others.
-   ================================================================= */
+   Modular interactions for the exhibition site.
+================================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------------------------------------------------------------
-     1. INTRO CLICK-THROUGH SEQUENCE
-     Clicking anywhere on the intro (or the advance dot) moves to the
-     next step. Background layers get a "step-N" class on the intro
-     wrapper so CSS can cross-fade/zoom them at the right moments.
-     --------------------------------------------------------------- */
-  const intro = document.getElementById('intro');
-  const introSteps = document.querySelectorAll('.intro-step');
-  const introAdvance = document.getElementById('introAdvance');
-  const btnBegin = document.getElementById('btnBegin');
-  const dotNav = document.getElementById('dotNav');
-
-  let step = 0;
-  const lastStep = introSteps.length - 1;
-
-  document.body.classList.add('intro-active');
-
-  function renderStep() {
-    introSteps.forEach(el => {
-      el.classList.toggle('is-active', Number(el.dataset.step) === step);
-    });
-    intro.className = 'intro step-' + step;
-  }
-  renderStep();
-
-  function advanceIntro() {
-    if (step < lastStep) {
-      step += 1;
-      renderStep();
-    }
-  }
-
-  intro.addEventListener('click', (e) => {
-    // Don't advance if the click was the "Begin Walking" button itself —
-    // that has its own handler below.
-    if (e.target.closest('#btnBegin')) return;
-    advanceIntro();
-  });
-  introAdvance.addEventListener('click', (e) => {
-    e.stopPropagation();
-    advanceIntro();
-  });
-
-  btnBegin.addEventListener('click', (e) => {
-    e.stopPropagation();
-    intro.classList.add('is-closing');
-    document.body.classList.remove('intro-active');
-    dotNav.classList.add('is-visible');
-    window.setTimeout(() => { intro.style.display = 'none'; }, 900);
-  });
-
-  /* ---------------------------------------------------------------
-     2. DOT NAVIGATION — active state via IntersectionObserver
-     --------------------------------------------------------------- */
-  const dots = document.querySelectorAll('.dot');
-  const sections = document.querySelectorAll('main .chapter, main .essay-title');
-
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        dots.forEach(d => d.classList.toggle('is-active', d.getAttribute('href') === '#' + id));
-      }
-    });
-  }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
-
-  document.querySelectorAll('.chapter[id]').forEach(s => navObserver.observe(s));
-
-  /* ---------------------------------------------------------------
-     3. REVEAL ON SCROLL
-     --------------------------------------------------------------- */
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  /* ---------------------------------------------------------------
-     4. CHAPTER 2 — MAP LIGHTBOX
-     --------------------------------------------------------------- */
-  const mapTrigger = document.getElementById('mapTrigger');
-  const mapLightbox = document.getElementById('mapLightbox');
-  const mapLightboxClose = document.getElementById('mapLightboxClose');
-
-  mapTrigger.addEventListener('click', () => mapLightbox.classList.add('is-open'));
-  mapLightboxClose.addEventListener('click', () => mapLightbox.classList.remove('is-open'));
-  mapLightbox.addEventListener('click', (e) => {
-    if (e.target === mapLightbox) mapLightbox.classList.remove('is-open');
-  });
-
-  /* ---------------------------------------------------------------
-     5. CHAPTER 3 — ANNOTATED DIAGRAM
-     --------------------------------------------------------------- */
-  const annotationPoints = document.querySelectorAll('.annotation-point');
-  const annotationDisplay = document.getElementById('annotationDisplay');
-
-  annotationPoints.forEach(pt => {
-    const show = () => {
-      annotationPoints.forEach(p => p.classList.remove('is-active'));
-      pt.classList.add('is-active');
-      annotationDisplay.style.opacity = 0;
-      window.setTimeout(() => {
-        annotationDisplay.textContent = pt.dataset.note;
-        annotationDisplay.style.opacity = 1;
-      }, 150);
-    };
-    pt.addEventListener('mouseenter', show);
-    pt.addEventListener('click', show); // touch devices
-  });
-
-  /* ---------------------------------------------------------------
-     6. CHAPTER 4 — CINEMATIC VIDEO MODAL
-     --------------------------------------------------------------- */
-  const videoTrigger = document.getElementById('videoTrigger');
-  const cineModal = document.getElementById('cineModal');
-  const cineModalClose = document.getElementById('cineModalClose');
-
-  videoTrigger.addEventListener('click', () => cineModal.classList.add('is-open'));
-  cineModalClose.addEventListener('click', () => cineModal.classList.remove('is-open'));
-  cineModal.addEventListener('click', (e) => {
-    if (e.target === cineModal) cineModal.classList.remove('is-open');
-  });
-
-  /* ---------------------------------------------------------------
-     7. CHAPTER 5 — PAGE-FLIP BOOK
-     Pages flip via rotateY. "page" 0 = cover, N = how many pages
-     are currently flipped open.
-     --------------------------------------------------------------- */
-  
-
-  /* ---------------------------------------------------------------
-     8. CHAPTER 6 — EXPANDING REFLECTION CARDS
-     --------------------------------------------------------------- */
-  const reflectionCards = document.querySelectorAll('.reflection-card');
-  reflectionCards.forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('is-open');
-    });
-  });
-
-});
-
-/* ==========================================================
-   NEW WEBSITE INTERACTIONS
-========================================================== */
-window.addEventListener("click",(e)=>{
-
-if(e.target===videoModal){
-
-videoPlayer.pause();
-
-videoModal.classList.remove("active");
-
-}
-
-});
-
-
-// ---------- BOARD ZOOM ----------
-
-document.querySelectorAll(".board-image").forEach(img=>{
-
-img.addEventListener("click",()=>{
-
-const overlay=document.createElement("div");
-
-overlay.style.position="fixed";
-
-overlay.style.inset="0";
-
-overlay.style.background="rgba(0,0,0,.92)";
-
-overlay.style.display="flex";
-
-overlay.style.alignItems="center";
-
-overlay.style.justifyContent="center";
-
-overlay.style.zIndex="999999";
-
-const clone=document.createElement("img");
-
-clone.src=img.src;
-
-clone.style.maxWidth="92vw";
-
-clone.style.maxHeight="92vh";
-
-clone.style.cursor="zoom-out";
-
-overlay.appendChild(clone);
-
-overlay.addEventListener("click",()=>{
-
-overlay.remove();
-
-});
-
-document.body.appendChild(overlay);
-
-});
-
-});
-/* ===========================
-   BOARD VIEWER
-=========================== */
-
-function openBoard(src){
-
-    const viewer = document.getElementById("boardViewer");
-
-    const image = document.getElementById("boardViewerImage");
-
-    image.src = src;
-
-    viewer.classList.add("active");
-
-}
-
-function closeBoard(){
-
-    document
-        .getElementById("boardViewer")
-        .classList.remove("active");
-
-}
-
-document
-.getElementById("boardViewer")
-.addEventListener("click",function(e){
-
-    if(e.target===this){
-
-        closeBoard();
-
-    }
-
-});
-
-function openBook() {
-
-    document.getElementById("bookModal").classList.add("active");
-
-    if (!$("#flipbook").data("turn")) {
-
-        $("#flipbook").turn({
-            width:1100,
-            height:720,
-            autoCenter:true,
-            gradients:true,
-            elevation:60
+    /* ---------------------------------------------------------------
+       1. INTRO SEQUENCE
+    --------------------------------------------------------------- */
+    const initIntro = () => {
+        const intro = document.getElementById('intro');
+        if (!intro) return;
+
+        const introSteps = document.querySelectorAll('.intro-step');
+        const introAdvance = document.getElementById('introAdvance');
+        const btnBegin = document.getElementById('btnBegin');
+        const dotNav = document.getElementById('dotNav');
+
+        let step = 0;
+        const lastStep = introSteps.length - 1;
+
+        document.body.classList.add('intro-active');
+
+        const renderStep = () => {
+            introSteps.forEach(el => {
+                el.classList.toggle('is-active', Number(el.dataset.step) === step);
+            });
+            intro.className = 'intro step-' + step;
+        };
+        
+        renderStep();
+
+        const advanceIntro = () => {
+            if (step < lastStep) {
+                step += 1;
+                renderStep();
+            }
+        };
+
+        intro.addEventListener('click', (e) => {
+            if (e.target.closest('#btnBegin')) return;
+            advanceIntro();
         });
 
-    }
+        introAdvance.addEventListener('click', (e) => {
+            e.stopPropagation();
+            advanceIntro();
+        });
 
-}
+        btnBegin.addEventListener('click', (e) => {
+            e.stopPropagation();
+            intro.classList.add('is-closing');
+            document.body.classList.remove('intro-active');
+            dotNav.classList.add('is-visible');
+            setTimeout(() => { intro.style.display = 'none'; }, 900);
+        });
+    };
 
-function closeBook() {
+    /* ---------------------------------------------------------------
+       2. SCROLL NAVIGATION & REVEAL
+    --------------------------------------------------------------- */
+    const initObservers = () => {
+        // Dot Navigation Active State
+        const dots = document.querySelectorAll('.dot');
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    dots.forEach(d => d.classList.toggle('is-active', d.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { threshold: 0, rootMargin: '-45% 0px -45% 0px' });
 
-    document.getElementById("bookModal").classList.remove("active");
+        document.querySelectorAll('.chapter, .hero').forEach(s => {
+            if (s.id) navObserver.observe(s);
+        });
 
-}
+        // Scroll Reveal Animation
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
-document.getElementById("bookModal").addEventListener("click", function(e){
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    };
 
-    if(e.target===this){
+    /* ---------------------------------------------------------------
+       3. MODAL CONTROLLER (BOARD & BOOK)
+    --------------------------------------------------------------- */
+    const initModals = () => {
+        const boardModal = document.getElementById('boardViewer');
+        const boardImage = document.getElementById('boardViewerImage');
+        const bookModal = document.getElementById('bookModal');
+        
+        // Open Board
+        document.querySelectorAll('.js-open-board').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const src = trigger.getAttribute('data-src');
+                if (src && boardImage) {
+                    boardImage.src = src;
+                    boardModal.classList.add('is-active');
+                    document.body.classList.add('modal-active');
+                }
+            });
+        });
 
-        closeBook();
+        // Open Book
+        document.querySelectorAll('.js-open-book').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                bookModal.classList.add('is-active');
+                document.body.classList.add('modal-active');
+                initTurnJs();
+            });
+        });
 
-    }
+        // Universal Close Logic
+        const closeModals = () => {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('is-active');
+            });
+            document.body.classList.remove('modal-active');
+            
+            // Pause any playing videos when closing modals
+            document.querySelectorAll('video').forEach(video => video.pause());
+        };
+
+        // Close on Button Click
+        document.querySelectorAll('.js-close-modal').forEach(btn => {
+            btn.addEventListener('click', closeModals);
+        });
+
+        // Close on Background Click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.classList.contains('modal-content')) {
+                    closeModals();
+                }
+            });
+        });
+
+        // Close on Escape Key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModals();
+        });
+    };
+
+    /* ---------------------------------------------------------------
+       4. FLIPBOOK INITIALIZATION
+    --------------------------------------------------------------- */
+    const initTurnJs = () => {
+        const flipbook = $("#flipbook");
+        
+        // Prevent double initialization
+        if (flipbook.data("turn")) return;
+
+        // Dynamically inject pages to keep HTML clean
+        const pages = [
+            "5. DESIGN/studio ass 2 collection.jpeg",
+            "5. DESIGN/studio ass 2 1.jpg",
+            "5. DESIGN/studio ass 2 2.jpg",
+            "5. DESIGN/studio ass 2 3.jpg",
+            "5. DESIGN/studio ass 2 4.jpg",
+            "5. DESIGN/studio ass 2 5.jpg",
+            "5. DESIGN/studio ass 2 6.jpg",
+            "5. DESIGN/studio ass 2 7.jpg",
+            "5. DESIGN/studio ass 2 8.jpg",
+            "5. DESIGN/studio ass 2 9.jpg",
+            "5. DESIGN/studio ass 2 10.jpg",
+            "5. DESIGN/studio ass 2 11.jpg",
+            "5. DESIGN/studio ass 2 12.jpg",
+            "5. DESIGN/studio ass 2 13.jpg",
+            "5. DESIGN/studio ass 2 14.jpg",
+            "5. DESIGN/studio ass 2 15.jpg",
+            "5. DESIGN/studio ass 2 16.jpg",
+            "5. DESIGN/studio ass 2 17.jpg",
+            "5. DESIGN/studio ass 2 18.jpg",
+            "5. DESIGN/studio ass 2 19.jpg"
+        ];
+
+        let html = '';
+        pages.forEach(src => {
+            html += `<div class="page"><img src="${src}" alt="Book Page"></div>`;
+        });
+        
+        document.getElementById('flipbook').innerHTML = html;
+
+        // Initialize Turn.js
+        flipbook.turn({
+            width: 1100,
+            height: 720,
+            autoCenter: true,
+            gradients: true,
+            elevation: 60
+        });
+    };
+
+    // Execute Modules
+    initIntro();
+    initObservers();
+    initModals();
 
 });

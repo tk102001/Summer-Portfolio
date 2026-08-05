@@ -215,9 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600); 
     };
 
-    // Execute Modules
+   // Execute Modules
     initIntro();
     initObservers();
     initModals();
-
 });

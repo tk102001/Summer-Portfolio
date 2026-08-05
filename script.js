@@ -155,43 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
        4. FLIPBOOK INITIALIZATION
     --------------------------------------------------------------- */
     const initTurnJs = () => {
-        const flipbook = $("#flipbook");
-        
-        // Prevent double initialization
-        if (flipbook.data("turn")) return;
+    const flipbook = $("#flipbook");
+    
+    // Prevent double initialization
+    if (flipbook.data("turn")) return;
 
-        // Dynamically inject pages to keep HTML clean
-        const pages = [
-            "5. DESIGN/studio ass 2 collection.jpeg",
-            "5. DESIGN/studio ass 2 1.jpg",
-            "5. DESIGN/studio ass 2 2.jpg",
-            "5. DESIGN/studio ass 2 3.jpg",
-            "5. DESIGN/studio ass 2 4.jpg",
-            "5. DESIGN/studio ass 2 5.jpg",
-            "5. DESIGN/studio ass 2 6.jpg",
-            "5. DESIGN/studio ass 2 7.jpg",
-            "5. DESIGN/studio ass 2 8.jpg",
-            "5. DESIGN/studio ass 2 9.jpg",
-            "5. DESIGN/studio ass 2 10.jpg",
-            "5. DESIGN/studio ass 2 11.jpg",
-            "5. DESIGN/studio ass 2 12.jpg",
-            "5. DESIGN/studio ass 2 13.jpg",
-            "5. DESIGN/studio ass 2 14.jpg",
-            "5. DESIGN/studio ass 2 15.jpg",
-            "5. DESIGN/studio ass 2 16.jpg",
-            "5. DESIGN/studio ass 2 17.jpg",
-            "5. DESIGN/studio ass 2 18.jpg",
-            "5. DESIGN/studio ass 2 19.jpg"
-        ];
-
-        let html = '';
-        pages.forEach(src => {
-            html += `<div class="page"><img src="${src}" alt="Book Page"></div>`;
-        });
-        
-        document.getElementById('flipbook').innerHTML = html;
-
-        // Initialize Turn.js
+    // Add a 50ms delay to allow the modal to become visible 
+    // so Turn.js can accurately calculate dimensions
+    setTimeout(() => {
         flipbook.turn({
             width: 1100,
             height: 720,
@@ -199,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             gradients: true,
             elevation: 60
         });
-    };
-
+    }, 50);
+};
     // Execute Modules
     initIntro();
     initObservers();

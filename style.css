@@ -80,16 +80,17 @@ body.intro-active { overflow: hidden; height: 100vh; }
 /* =================================================================
    INTRO SEQUENCE
    ================================================================= */
-.intro {
-  position: fixed;
-  inset: 0;
-  z-index: 500;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  cursor: pointer;
+.intro{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    z-index:999999;
+    background:var(--paper);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 .intro.is-closing { animation: introOut 0.9s ease forwards; }
 @keyframes introOut { to { opacity: 0; visibility: hidden; } }
@@ -470,25 +471,16 @@ main { padding-left: 0; }
   perspective: 1800px;
 }
 .book-pages{
-
     width:min(1100px,90vw);
-
     margin:auto;
-
     padding:80px 0;
-
 }
 
 .book-pages img{
-
     width:100%;
-
     display:block;
-
     margin-bottom:80px;
-
     box-shadow:0 20px 60px rgba(0,0,0,.15);
-
 }
 .book-page[data-page="0"] { z-index: 4; }
 .book-page[data-page="1"] { z-index: 3; }
